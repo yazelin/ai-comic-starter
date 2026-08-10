@@ -1,0 +1,27 @@
+A clean character model sheet (turnaround) of ONE character, three full-body views in a single horizontal row, all at the SAME height and SAME scale, standing in a neutral A-pose:
+1) FRONT view  2) SIDE view (facing right)  3) BACK view
+
+REFERENCE IMAGES:
+- Image 1: the character, full body, front view. This is the definitive design.
+- Image 2: close-up of the same character's head and upper body.
+
+CHARACTER SHEET (every item must be visible and identical in all three views):
+- HEAD: a smooth dark navy-black sphere with a soft luminous spiral galaxy painted across it, scattered white star specks. No neck. The head sits directly on the shoulders.
+- FACE: two large white almond-shaped eyes with heavy upper lids giving a calm, half-lidded look, and one small simple closed smile. Nothing else on the face.
+- HAT: a tan/camel felt fedora with a dark brown grosgrain band, worn straight, brim slightly down.
+- TORSO: a charcoal navy single-breasted suit jacket, notch lapels, over a crisp white collared shirt buttoned to the top. No tie.
+- ARMS: exactly TWO smooth boneless tentacle arms in the same galaxy starfield texture, emerging from the jacket sleeves past white shirt cuffs. Tapered rounded tips, no fingers, no hands.
+- LEGS: exactly SIX tapering tentacle legs in the same galaxy starfield texture, fanned out in a stable stance. A row of small round suckers runs down the inner side of each tentacle.
+- FOOTWEAR: each of the six legs ends in its own black leather Chelsea ankle boot. Exactly SIX boots.
+- TROUSERS: navy suit trousers draped over the two middle legs only, hanging like ordinary trousers; the outer four tentacle legs are bare and fully visible.
+
+MUST NOT APPEAR:
+- any text, letters, numbers, labels, captions, logos, watermarks or signatures
+- any grid, blueprint background, colour swatches, annotation lines or callout arrows
+- human legs, human feet, human hands or fingers
+- a nose, eyebrows, teeth, or a second facial expression
+- a second hat, glasses, sunglasses, tie, or bow tie
+- more or fewer than six legs, or more or fewer than six boots
+- any additional character, prop, furniture or scenery
+
+RENDERING: soft 3D collectible-figure render, matte felt and wool materials, gentle studio lighting, soft contact shadow under each boot. Plain flat off-white background, nothing else in frame. Wide landscape composition.
