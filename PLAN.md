@@ -92,6 +92,19 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
 
 `scripts/` 與 `.github/workflows/` 也整份沿用，後端切換全靠環境變數。
 
+## cast-lock 怎麼進來
+
+[cast-lock](https://github.com/yazelin/cast-lock-skill) 是獨立的 skill repo，neko-tensei 是用
+`cast.json` 的 `_` 欄位指過去，不複製。但學員是 fork，他們機器上沒有裝那個 skill，
+而課程第四段整段就是驗收。所以拆開處理：
+
+| 東西 | 進不進 | 為什麼 |
+|---|---|---|
+| `build.py`／`check.py` | 進，放 `tools/` | 沒有它第四段跑不了；setup 腳本放消費 repo 內是既有慣例 |
+| `cast.json` | 進 | 本來就要有 |
+| SKILL.md 全文 | 不進 | 複製一份等於多一個會漂的事實來源 |
+| README 裡的三條摘要 | 進 | 設定圖一定要當參考圖傳、特徵寫到字面、「沒有什麼」也要寫死；後面附連結指向 cast-lock repo |
+
 ## fork 者一定會踩的兩個坑
 
 從 neko-tensei README 抄過來，樣板的 README 要寫在最前面：
