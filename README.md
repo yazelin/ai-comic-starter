@@ -14,13 +14,17 @@
 > `.github/workflows/` 還沒從 neko-tensei 搬過來，所以現在**還不能按一鍵出圖**。
 > 進度看 [PLAN.md](PLAN.md)。
 
-已經能用的是設定與驗收那一半：
+已經能用的：
 
 ```bash
-python3 tools/build.py --cast story/cast.json --chars glitch,blackhole --refs-only
+python3 scripts/test_pipeline.py        # 樣板自我檢查(23 項)
+python3 scripts/test_verify_pages.py    # 驗收規則的檢查(8 項)
 python3 tools/check.py --cast story/cast.json --chars glitch,blackhole
 python3 tools/count_limbs.py story/refs/blackhole.png --views 3 --expect 6
 ```
+
+`scripts/` 的產線本體已經搬過來並參數化了（角色、repo 名稱、端點預設值全部不寫死），
+還差網站產生器與 workflow 才能一鍵出圖。
 
 產線接上之後的流程會是：Fork、填下面那幾個 secret、Actions 按 Run workflow。
 

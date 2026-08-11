@@ -1,0 +1,19 @@
+{
+  "site": {
+    "title": "格莉奇OS",
+    "base": "https://yazelin.github.io/ai-comic-starter/"
+  },
+  "characters": [
+    {
+      "slug": "glitch",
+      "name": "格莉奇",
+      "role": "4KB 記憶體．把記憶外包給讀者"
+    },
+    {
+      "slug": "blackhole",
+      "name": "黑洞先生",
+      "role": "永遠吃不飽．負責把被遺忘的東西吃掉"
+    }
+  ],
+  "episodes": []
+}

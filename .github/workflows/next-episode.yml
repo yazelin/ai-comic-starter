@@ -1,0 +1,149 @@
+name: 下一話
+
+# cron 先不開。等人工用 workflow_dispatch 跑過一次、確認 PR 的樣子與
+# 手機可讀性之後,再由 yazelin 把下面三行的註解拿掉。
+on:
+  # schedule:
+  #   - cron: '0 14 * * 5'   # 每週五 台北 22:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  discussions: read
+
+concurrency:
+  group: next-episode
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 裝相依（整條線只有這兩個 pip 套件）
+        run: pip install --quiet opencc-python-reimplemented pillow
+
+      - name: 確認沒有還開著的草稿 PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          open=$(gh pr list --label auto-episode --state open --json number --jq 'length')
+          if [ "$open" != "0" ]; then
+            echo "::error::已經有 $open 個開著的 auto-episode PR,先處理完再產下一話"
+            exit 1
+          fi
+
+      # 要哪些金鑰看選了哪組後端。以前這裡硬要求 CODEX_IMAGE_KEY,換成
+      # Gemini 出圖的人會被自己的檢查擋下來,而錯誤訊息還指向一把他根本
+      # 不需要的金鑰。
+      - name: 確認選到的後端有金鑰
+        env:
+          PLANNER_PROVIDER: ${{ vars.PLANNER_PROVIDER }}
+          IMAGE_PROVIDER: ${{ vars.IMAGE_PROVIDER }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          CODEX_IMAGE_KEY: ${{ secrets.CODEX_IMAGE_KEY }}
+          GEMINI_IMAGE_KEY: ${{ secrets.GEMINI_IMAGE_KEY }}
+        run: |
+          P="${PLANNER_PROVIDER:-gemini}"
+          I="${IMAGE_PROVIDER:-codex}"
+          echo "企劃走 $P,出圖走 $I"
+          miss=0
+          case "$P" in
+            gemini) [ -n "$GEMINI_API_KEY" ] || { echo "::error::PLANNER_PROVIDER=gemini 但缺 GEMINI_API_KEY"; miss=1; } ;;
+            openai) [ -n "$OPENAI_API_KEY" ] || { echo "::error::PLANNER_PROVIDER=openai 但缺 OPENAI_API_KEY"; miss=1; } ;;
+            *) echo "::error::不認得的 PLANNER_PROVIDER=$P(只有 gemini / openai)"; miss=1 ;;
+          esac
+          case "$I" in
+            codex)  [ -n "$CODEX_IMAGE_KEY" ] || { echo "::error::IMAGE_PROVIDER=codex 但缺 CODEX_IMAGE_KEY"; miss=1; } ;;
+            gemini) [ -n "$GEMINI_IMAGE_KEY$GEMINI_API_KEY" ] || { echo "::error::IMAGE_PROVIDER=gemini 但 GEMINI_IMAGE_KEY 與 GEMINI_API_KEY 都沒設"; miss=1; } ;;
+            *) echo "::error::不認得的 IMAGE_PROVIDER=$I(只有 codex / gemini)"; miss=1 ;;
+          esac
+          exit $miss
+
+      - name: 算出這次是第幾話
+        id: ep
+        run: |
+          N=$(python3 -c "import json;print(max(e['n'] for e in json.load(open('episodes.json'))['episodes']) + 1)")
+          echo "n=$N" >> "$GITHUB_OUTPUT"
+          echo "這次要產第 $N 話"
+
+      # runner 用完即丟,沒有 cache 的話「跑到一半掛掉」永遠只能整話重來。
+      # 快取的是這一話已經出好的圖,加上那一份企劃——兩者是同一份狀態,
+      # 只留圖不留企劃的話,下次重跑會出一份新劇本配到舊圖。
+      - name: 取回上次沒跑完的進度
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            images/ep${{ steps.ep.outputs.n }}
+            .pipeline-cache
+          key: ep-progress-${{ steps.ep.outputs.n }}
+
+      - name: 產出下一話
+        id: gen
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 金鑰走 secrets,選哪個後端與模型名走 vars(不是機密,而且在
+          # repo 設定頁看得到現在跑的是哪一組)。沒設的一律是空字串,
+          # 腳本用 `or` 退回內建預設。
+          PLANNER_PROVIDER: ${{ vars.PLANNER_PROVIDER }}
+          IMAGE_PROVIDER: ${{ vars.IMAGE_PROVIDER }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_WEB_BASE_URL: ${{ secrets.GEMINI_WEB_BASE_URL }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          OPENAI_MAX_TOKENS: ${{ vars.OPENAI_MAX_TOKENS }}
+          CODEX_IMAGE_KEY: ${{ secrets.CODEX_IMAGE_KEY }}
+          CODEX_IMAGE_BASE_URL: ${{ secrets.CODEX_IMAGE_BASE_URL }}
+          GEMINI_IMAGE_KEY: ${{ secrets.GEMINI_IMAGE_KEY }}
+          GEMINI_IMAGE_BASE_URL: ${{ vars.GEMINI_IMAGE_BASE_URL }}
+          GEMINI_IMAGE_MODEL: ${{ vars.GEMINI_IMAGE_MODEL }}
+        run: python3 scripts/next_episode.py
+
+      - name: 開 PR
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          N=$(python3 -c "import json;print(json.load(open('episodes.json'))['episodes'][-1]['n'])")
+          BR="auto/ep$N"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BR"
+          git add -A
+          git rm --cached ".pr-body-ep$N.md" >/dev/null 2>&1 || true
+          git commit -m "feat: 第 $N 話草稿(自動產出,待人工確認)"
+          git push -u origin "$BR"
+          gh pr create --base main --head "$BR" \
+            --title "第 $N 話草稿——待你看過再 merge" \
+            --body-file ".pr-body-ep$N.md" \
+            --label auto-episode
+
+      # 成功時不存:publish 已經把圖 commit 進 PR 了,再留一份快取只會讓下一話
+      # 誤撿到上一話的殘骸。
+      #
+      # 失敗**和取消**都要存。cancelled() 那半邊很容易漏——GitHub Actions 的
+      # if: failure() 在取消時不會執行,而人按 Cancel 的時候那些圖已經燒掉了,
+      # 一樣該留著。開 issue 則只在真的失敗時做:人自己按的取消不需要通知自己。
+      - name: 存下沒跑完的進度
+        if: failure() || cancelled()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            images/ep${{ steps.ep.outputs.n }}
+            .pipeline-cache
+          key: ep-progress-${{ steps.ep.outputs.n }}
+
+      - name: 失敗就開 issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create --label auto-episode \
+            --title "自動產出下一話失敗（$(date -u +%Y-%m-%d)）" \
+            --body "跑失敗了，沒有留下半成品 PR。記錄在 ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
