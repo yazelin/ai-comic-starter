@@ -12,8 +12,9 @@ CHARACTER SHEET (every item must be visible and identical in all three views):
 - TORSO: a charcoal navy single-breasted suit jacket, notch lapels, over a crisp white collared shirt buttoned to the top. No tie.
 - ARMS: exactly TWO smooth boneless tentacle arms in the same galaxy starfield texture, emerging from the jacket sleeves past white shirt cuffs. Tapered rounded tips, no fingers, no hands.
 - LEGS: exactly SIX tapering tentacle legs in the same galaxy starfield texture, fanned out in a stable stance. A row of small round suckers runs down the inner side of each tentacle.
+- LEG COUNT IN EVERY VIEW: all six legs and all six boots must remain individually countable in the FRONT, SIDE and BACK views alike. In the SIDE view, stagger the legs forward and backward so that six separate boots are still visible on the ground; do NOT let legs line up and hide behind one another, and do NOT drop any leg.
 - FOOTWEAR: each of the six legs ends in its own black leather Chelsea ankle boot. Exactly SIX boots.
-- TROUSERS: navy suit trousers draped over the two middle legs only, hanging like ordinary trousers; the outer four tentacle legs are bare and fully visible.
+- TROUSERS: navy suit trousers draped over the two middle legs only, hanging like ordinary trousers; the outer four tentacle legs are bare and fully visible. The trousers must be present and clearly visible in all three views, including the side view.
 
 MUST NOT APPEAR:
 - any text, letters, numbers, labels, captions, logos, watermarks or signatures
