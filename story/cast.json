@@ -1,0 +1,68 @@
+{
+  "_": "cast-lock 技能用的角色設定。https://github.com/yazelin/cast-lock-skill",
+  "root": "..",
+  "style_ref": {
+    "path": "story/refs/style.webp",
+    "desc": "the house art style: flat cel-shaded anime, clean line art, cool night lighting from a screen. NOTE: the leg count in this image is wrong (seven), it is a style reference only, never a design reference"
+  },
+  "balloon_ref": {
+    "path": "story/refs/balloons.webp",
+    "desc": "a chart of the seven balloon shapes, all drawn EMPTY, in reading order: SHOUT / OVAL / WEAK / TREMBLE (top row), THOUGHT / DEMON / CAPTION (bottom row)"
+  },
+  "cast": {
+    "glitch": {
+      "name": "格莉奇",
+      "ref": "story/refs/glitch.webp",
+      "desc": "GLITCH model sheet (front, side, back)",
+      "sheet": "GLITCH: a small pale girl, the shorter of the two. Short mint-and-lavender gradient bob with ONE long ahoge standing up from the crown. TWO grey antenna devices with teal screen panels, one on each side of her head, standing up like small aerials - they are hardware, not animal ears. TWO dark bar-shaped hair clips on one side. Small solid pixel blocks in pink, teal and purple float in the air around her hair; they are part of her, they appear in every panel. Large teal-green eyes. Small square pixel blush marks on her cheeks. A dark choker. An oversized pale iridescent hoodie with dark navy stripes on the sleeves; on the chest an orange ERROR plate sits above a grey pixel-art cat face. A dark device with a teal screen on one wrist. Iridescent transparent straps hang from the waist. Dark navy skirt, bare legs, white-and-lavender high-top sneakers with pink accents and a mint-green panel on the tongue. She wears NO hat of any kind and NO glasses.",
+      "must": [
+        "薄荷加薰衣草的短鮑伯,頭頂一根長呆毛",
+        "頭側兩個灰色天線裝置,上面有青色螢幕面板",
+        "同一側兩支深色條狀髮夾",
+        "頭髮周圍飄著粉紅、青綠、紫色的實心像素方塊",
+        "胸口橘色 ERROR 牌,底下一個灰色像素貓臉",
+        "深色 choker",
+        "單邊手腕上一個帶青色螢幕的深色裝置",
+        "腰間垂下的彩虹透明吊帶",
+        "白紫配色高筒鞋,鞋舌上有薄荷綠色塊"
+      ],
+      "must_not": [
+        "任何帽子(她從不戴帽,黑洞先生才有禮帽)",
+        "眼鏡",
+        "長髮、馬尾或雙馬尾(她是短鮑伯)",
+        "把頭側的天線裝置畫成動物耳朵"
+      ]
+    },
+    "blackhole": {
+      "name": "黑洞先生",
+      "ref": "story/refs/blackhole.webp",
+      "desc": "MR BLACK HOLE model sheet (front, side, back)",
+      "sheet": "MR BLACK HOLE: the tall one. His head is a smooth dark navy-black sphere with a soft luminous spiral galaxy painted across it and scattered white star specks; there is NO neck, the head sits straight on the shoulders. His face is only TWO large white almond eyes with heavy upper lids giving a calm half-lidded look, plus ONE small closed smile - nothing else, no nose, no eyebrows, no teeth. In profile only one eye is visible. He wears a tan/camel felt fedora with a dark brown grosgrain band, and a charcoal navy single-breasted suit jacket with notch lapels over a crisp white collared shirt buttoned to the top, no tie. Exactly TWO boneless tentacle arms in the same galaxy starfield texture come out of the jacket sleeves past white shirt cuffs; they taper to rounded tips and have NO hands and NO fingers. He stands on exactly SIX tapering tentacle legs in the same galaxy texture, each with a row of small round suckers down its inner side, and each ending in its OWN black leather Chelsea ankle boot - six legs, six boots, never five and never seven. Navy suit trousers cover the middle two legs; the outer four are bare.",
+      "must": [
+        "星系球體頭,沒有脖子",
+        "臉上只有兩隻白色杏仁眼(重眼皮)和一個小小的閉口微笑",
+        "卡其色氈質禮帽,深棕色帽帶",
+        "炭藍色單排扣西裝外套,裡面白襯衫扣到最上面,沒有領帶",
+        "兩隻觸手手臂從袖口伸出,露出白色袖口,末端是圓的",
+        "六隻觸手腿,每一隻都穿一隻黑色切爾西短靴(六隻腿六隻靴)",
+        "觸手內側整排小圓吸盤"
+      ],
+      "must_not": [
+        "手掌或手指(他的手臂末端是圓的)",
+        "鼻子、眉毛、牙齒",
+        "領帶或領結",
+        "眼鏡",
+        "第二頂帽子",
+        "五隻腿或七隻腿,五隻靴或七隻靴"
+      ]
+    }
+  },
+  "world": {},
+  "global_rules": [
+    "畫風是平塗賽璐璐動漫:乾淨的線稿、平塗色塊、不做厚塗質感。黑洞先生的設定圖是 3D 渲染的,那只鎖他的造型,不鎖畫風,畫進格子裡時要翻譯成同一套平塗畫風",
+    "黑洞先生的腿數是這部作品最容易畫錯的東西。實測:設定圖側視曾經是五隻、規格寫六隻、成品畫成七隻,三個數字互不相同。把數量寫進 must_not 擋不住它,每一格都要真的數過",
+    "數量不要用眼睛驗。跑 paper-puppet-skill 的 count_limbs.py,或用 vision 問「這一格有幾隻穿靴子的腳」,那是閉合式問題比人眼可靠",
+    "格莉奇的識別物是一組離散小道具(天線、髮夾、ERROR 牌、手環、吊帶),它們比大輪廓更容易漏,逐格對照 must 清單走一遍",
+    "對話框形狀要跟著情緒走,整頁都是圓角矩形就是錯的"
+  ]
+}

@@ -170,7 +170,17 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
    一個踩到的坑：第一次生成逾時，原因是我丟了兩張原尺寸 PNG（各 2 MB）當參考圖，
    違反 cast-lock 的「參考圖要先縮圖」。縮成 1024px JPEG（150 KB）後一次就過。
    neko-tensei 目前沒事（它的參考圖都是 webp），但產線裡沒有東西擋著有人放大檔進去。
-4. **`story/cast.json`**：兩個角色的 sheet，辨識道具要寫成離散、看得見的東西。
+4. ~~**`story/cast.json`**~~ **已完成**。用 cast-lock 的 `build.py --refs-only` 與
+   `check.py` 都跑過，路徑解得開、驗收清單長得出來（格莉奇 13 項、黑洞先生 13 項）。
+
+   `balloon_ref`（七種對話框圖表）整份沿用 neko-tensei 的，已複製進來。
+   `world` 先留空，等有場景再補。
+
+   `style_ref` 的 `desc` 裡明文註記「這張圖的腿數是錯的（七隻），它只是畫風參考、
+   永遠不是造型參考」，免得之後有人拿它當對照。
+
+   `global_rules` 裡有兩條是這次踩出來的：黑洞先生的腿數是最容易錯的東西（設定圖
+   曾經五隻、規格六隻、成品七隻，三個數字都不一樣），以及數量不准用眼睛驗。
 5. **`story/README.md`**：世界觀與連載前提。
 6. **`episodes.json`**：第一話的骨架。
 7. **README**：fork 之後要改什麼、要設哪些 secret。
