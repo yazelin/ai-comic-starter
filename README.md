@@ -7,12 +7,21 @@
 
 想知道為什麼這樣設計、每一步踩過什麼雷，讀 [PLAN.md](PLAN.md)。
 
-## 快速開始
+## 現在能用到哪裡
 
-1. Fork 這個 repo
-2. 到 Settings > Secrets and variables > Actions 填下面那四個
-3. Actions 分頁按 Run workflow
-4. 等一下，`images/` 底下會出現新的一頁
+> **產線還沒接上。** 角色設定、世界觀、驗收工具都好了，但 `scripts/` 與
+> `.github/workflows/` 還沒從 neko-tensei 搬過來，所以現在**還不能按一鍵出圖**。
+> 進度看 [PLAN.md](PLAN.md)。
+
+已經能用的是設定與驗收那一半：
+
+```bash
+python3 tools/build.py --cast story/cast.json --chars glitch,blackhole --refs-only
+python3 tools/check.py --cast story/cast.json --chars glitch,blackhole
+python3 tools/count_limbs.py story/refs/blackhole.png --views 3 --expect 6
+```
+
+產線接上之後的流程會是：Fork、填下面那幾個 secret、Actions 按 Run workflow。
 
 ## 要填的 secret
 

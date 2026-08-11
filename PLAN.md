@@ -196,7 +196,23 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
    **不給任何角色創傷背景。** 格莉奇為什麼只有 4KB 的官方說法是「她自己也忘記了」，
    這句本身就是笑點，不是迴避。這條是硬規定，寫進了「不要出現的東西」。
 6. **`episodes.json`**：第一話的骨架。
-7. **README**：fork 之後要改什麼、要設哪些 secret。
+7. ~~**README**~~ **已完成**：fork 指南、四個 secret、兩個一定會踩的坑寫在最前面、
+   cast-lock 三條規矩摘要、驗收怎麼做。`tools/` 也補上了（`build.py`、`check.py`、
+   `count_limbs.py`），附上游來源以便同步。授權分開處理：程式碼 MIT、角色素材 CC BY-NC。
+
+8. **把 `scripts/` 與 `.github/workflows/` 搬過來**（尚未做，README 已註明產線還沒接上）。
+
+   不是 `cp` 就好。`next_episode.py` 有 1382 行，其中 **6 處寫死 `yazelin/neko-tensei`**
+   要參數化：
+
+   - GraphQL 查詢裡的 `repository(owner:"yazelin", name:"neko-tensei")`
+   - `UA` 字串
+   - PR 內文組圖片網址用的兩處 `raw.githubusercontent.com/yazelin/neko-tensei`
+   - `GEMINI_BASE` 與 `IMG_BASE` 的預設值（這兩個已經寫進 README 的「一定會踩的坑」）
+
+   還會連帶拉進整套 PWA 網站產生的邏輯（`ep/*.html`、`sw.js`、manifest），
+   那些對樣板不一定需要。**搬之前要先決定樣板要不要附網站**，還是只出圖、
+   讓學員自己決定怎麼發表。
 
 `scripts/` 與 `.github/workflows/` 整份沿用 neko-tensei 的，後端切換全靠環境變數。
 
