@@ -57,7 +57,28 @@
       ]
     }
   },
-  "world": {},
+  "world": {
+    "room": {
+      "name": "廢棄機房裡的小屋",
+      "ref": "story/refs/room.webp",
+      "desc": "THE ROOM scene reference, wide establishing shot, empty",
+      "sheet": "THE ROOM: a cosy living corner built inside a derelict machine room. Against the LEFT wall a wooden desk with a large glowing holographic screen floating above it (the main light source, cool cyan), a keyboard, a mouse, a mug and an angled desk lamp; wall shelves above it hold small chunky robot gadgets and pinned notes. In the CENTRE BACKGROUND stands a bank of dead server racks with a few dim status lights. Against the RIGHT wall a low bed with pillows, under a wide window with curtains showing a night city skyline; a potted plant beside it. A small round stool sits near the desk. Exposed pipes and cable trays run along the ceiling; the undecorated walls are bare concrete. Small pixel glitch blocks in mint, pink and purple drift in the air near the screen. The middle of the floor is kept clear.",
+      "must": [
+        "左牆:書桌加浮空螢幕(全場主光源,冷青色)、鍵盤、馬克杯、可調式桌燈",
+        "書桌上方層架擺著方頭方腦的小機器人與便條",
+        "中央背景一整排斷電的伺服器機櫃",
+        "右牆:矮床加枕頭,床頭上方是大窗與窗簾,窗外是夜間城市天際線",
+        "天花板外露管線與線槽,沒裝飾到的牆面是裸露水泥",
+        "螢幕附近飄著薄荷、粉紅、紫色的像素方塊",
+        "地板中間留空"
+      ],
+      "must_not": [
+        "白天或明亮的自然光(這個房間永遠是夜晚)",
+        "乾淨完好的辦公室天花板(管線一定要露出來)",
+        "窗外是郊區、田野或地面高度的街景(這裡是廢棄大樓的高樓層)"
+      ]
+    }
+  },
   "global_rules": [
     "畫風是平塗賽璐璐動漫:乾淨的線稿、平塗色塊、不做厚塗質感。黑洞先生的設定圖是 3D 渲染的,那只鎖他的造型,不鎖畫風,畫進格子裡時要翻譯成同一套平塗畫風",
     "黑洞先生的腿數是這部作品最容易畫錯的東西。實測:設定圖側視曾經是五隻、規格寫六隻、成品畫成七隻,三個數字互不相同。把數量寫進 must_not 擋不住它,每一格都要真的數過",

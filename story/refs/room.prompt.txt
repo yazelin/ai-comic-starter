@@ -1,0 +1,26 @@
+A CLEAN EMPTY SCENE REFERENCE for a comic. Draw the room itself, wide, with NO characters and NO people in it at all.
+
+REFERENCE IMAGES:
+- Image 1: the room's contents, colours and mood. Take the props and the palette from this, but redraw the whole thing in the art style of Image 2 and from a wider viewpoint.
+- Image 2: the house art style. Flat cel-shaded anime, clean confident line art, flat colour blocks, minimal gradients.
+
+THE ROOM: a small living corner built inside a derelict machine room. It is cosy and lived-in on the inside, but the shell around it is clearly an abandoned industrial space.
+
+Must be visible:
+- A desk against the left wall with a large glowing holographic screen floating above it, a keyboard, a mouse, a mug and an angled desk lamp. This screen is the most important object in the room.
+- Wall shelves above the desk holding small chunky robot gadgets and stacked notes.
+- A low bed with pillows against the right wall, under a wide window.
+- A wide window showing a night city skyline, seen from high up in a derelict building.
+- Curtains at the window, a potted plant, a small round stool.
+- Signs that the shell is a machine room: exposed pipes or cable trays along the ceiling, one bank of dead server racks in the background, bare concrete on the parts of the wall that are not decorated.
+- Small floating pixel glitch blocks in mint, pink and purple drifting in the air.
+
+LIGHTING: night. The holographic screen is the main light source and throws cool cyan light across the floor; the city outside adds a warmer purple glow at the window. Keep the palette cool: lavender, mint, deep blue, with warm accents only at the window.
+
+COMPOSITION: a wide establishing shot of the whole room from the doorway, showing the left wall, the far wall and the right wall at once, with a clear empty floor area in the middle. Leave enough open floor for two characters to stand, one of them tall and wide.
+
+MUST NOT APPEAR:
+- any character, person, animal or creature
+- any text, letters, numbers, labels, logos or watermarks
+- panel borders, gutters or speech balloons
+- a painterly or 3D-rendered look; this must be flat cel-shaded line art
