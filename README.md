@@ -10,8 +10,8 @@
 
 ## 現在能用到哪裡
 
-> **產線還沒接上。** 角色設定、世界觀、驗收工具都好了，但 `scripts/` 與
-> `.github/workflows/` 還沒從 neko-tensei 搬過來，所以現在**還不能按一鍵出圖**。
+> **還差網站與 workflow。** 角色設定、世界觀、產線本體、驗收工具都好了，
+> 還沒有網站產生器與 GitHub Actions 的 workflow，所以現在**還不能按一鍵出圖**。
 > 進度看 [PLAN.md](PLAN.md)。
 
 已經能用的：
@@ -30,23 +30,21 @@ python3 tools/count_limbs.py story/refs/blackhole.png --views 3 --expect 6
 
 ## 要填的 secret
 
-| 名稱 | 值 | 說明 |
-|---|---|---|
-| `GEMINI_API_KEY` | 你的 Gemini 金鑰 | 企劃（寫劇本）用 |
-| `GEMINI_WEB_BASE_URL` | `https://generativelanguage.googleapis.com` | **一定要填**，見下方 |
-| `IMAGE_PROVIDER` | `gemini` | **一定要填**，見下方 |
-| `GEMINI_IMAGE_KEY` | 你的 Gemini 金鑰 | 出圖用，可以跟上面同一把 |
+**只要兩個，而且是同一把金鑰。**
 
-### 兩個你一定會踩的坑
+| 名稱 | 值 |
+|---|---|
+| `GEMINI_API_KEY` | 你的 Gemini 金鑰（企劃／寫劇本用） |
+| `GEMINI_IMAGE_KEY` | 同一把就行（出圖用） |
 
-**`GEMINI_WEB_BASE_URL` 不填會打到別人的私有中繼站。** 這個變數的預設值指向原作者
-自架的服務，你沒有那把鑰匙，會直接失敗而且錯誤訊息看起來像金鑰壞了。填上官方端點
-`https://generativelanguage.googleapis.com` 就好，腳本組出來的路徑本來就是官方那個形狀。
+預設就是 Google 官方端點與官方影像模型，不用另外設 base url 也不用選 provider。
 
-**`IMAGE_PROVIDER` 預設是 `codex`，那也是私有服務。** 一定要改成 `gemini`。
+> neko-tensei 那邊的預設值指向作者自架的私有服務，fork 的人不改就會失敗，而且錯誤
+> 訊息看起來像金鑰壞了。樣板刻意把預設值翻轉過來，就是為了讓那個陷阱不存在。
 
-還有一個比較隱蔽的：如果你把企劃換成 OpenAI 相容的端點（Groq、Ollama、OpenRouter 都可以），
-`OPENAI_MAX_TOKENS` 預設是 32768，模型吃不下就會回空的，而且不會告訴你原因。
+想換別的後端才需要動這些：`PLANNER_PROVIDER=openai` 加 `OPENAI_BASE_URL`
+（Groq、Ollama、OpenRouter 都是 OpenAI 相容的）。走那條的話注意
+`OPENAI_MAX_TOKENS` 預設 32768，模型吃不下就會回空的，而且不會告訴你原因。
 
 ## 換成你自己的角色
 
