@@ -684,7 +684,9 @@ def page_body(page):
                 raise ValueError(f'{where}缺 text')
             kind = 'CAPTION BOX' if shape == 'CAPTION' else f"{shape} BALLOON"
             who = SPEAKER_REF.get(ln.get('speaker'), ln.get('speaker') or '')
-            out.append(f"  {kind} from {who}: {text}")
+            # CAPTION 是旁白框,沒有說話者。留一個空的 "from " 會讓生圖端
+            # 以為有個沒指名的角色要畫。
+            out.append(f"  {kind} from {who}: {text}" if who else f"  {kind}: {text}")
     return "\n".join(out)
 
 
@@ -734,11 +736,17 @@ def _zh(n):
 
 
 def _page_alt(page):
-    """用該頁的畫面與對白湊一句 alt。SEO 與無障礙都靠它。"""
-    scene = (page.get('panels') or [{}])[0].get('scene', '')
-    says = '、'.join(f'{NAME.get(s, s)}「{t}」'
+    """用該頁的對白湊一句 alt。SEO 與無障礙都靠它。
+
+    **只用對白,不用 scene。** scene 是寫給生圖模型看的英文,把它塞進 alt 等於
+    在中文站上放一段英文,對讀螢幕的人與搜尋引擎都沒有用。沒有對白的頁
+    (純過場)才退回用 scene,那時候有英文總比空的好。
+    """
+    says = '、'.join(f'{NAME.get(s, s)}「{t}」' if s else f'「{t}」'
                     for _n, s, _sh, t in _lines({'pages': [page]}))
-    return (scene + '：' + says)[:180] if says else scene[:180]
+    if says:
+        return says[:180]
+    return ((page.get('panels') or [{}])[0].get('scene', ''))[:180]
 
 
 def _cell(s):
@@ -754,7 +762,7 @@ def render_storyboard(plan, n):
            '先讀 [`story/README.md`](README.md) 的鐵律與框型表再動手。'
            '這一話由 pipeline 產出,對白與框型跟生圖 prompt 是同一份。\n',
            '## 這一話在講什麼\n', plan['desc'] + '\n',
-           '三個轉折：\n']
+           f'{_zh(len(plan["beats"]))}個轉折：\n']
     out += [f'{i}. {b}' for i, b in enumerate(plan['beats'], 1)]
     out.append('')
     for pg in plan['pages']:
@@ -777,6 +785,19 @@ def render_storyboard(plan, n):
     return "\n".join(out) + "\n"
 
 
+def _credit():
+    """每一話的署名。從 episodes.json 的 site.credit 讀,沒設就留空。
+
+    不要寫死。這一欄是給人看的功勞歸屬,寫死等於替 fork 的人決定他的作品是誰做的;
+    而且出圖後端是可以換的,寫死某個模型名字很快就會過期。
+    """
+    try:
+        cfg = json.loads((ROOT / 'episodes.json').read_text('utf-8'))
+        return cfg.get('site', {}).get('credit', '')
+    except Exception:
+        return ''
+
+
 def episode_entry(plan, n, date, has_cover):
     pages = []
     if has_cover:
@@ -785,7 +806,7 @@ def episode_entry(plan, n, date, has_cover):
     for pg in plan['pages']:
         pages.append({'f': f"{pg['n']}.webp", 'alt': _page_alt(pg)})
     return {'n': n, 'title': plan['title'], 'date': date, 'desc': plan['desc'],
-            'credit': '劇情與作畫：Claude × gpt-image-2', 'pages': pages}
+            'credit': _credit(), 'pages': pages}
 
 
 def pr_body(plan, n, wishes, wish_err=None, branch=None, verdicts=None):
@@ -816,7 +837,7 @@ def pr_body(plan, n, wishes, wish_err=None, branch=None, verdicts=None):
         wish_line = "這次沒有許願，由 AI 自己決定要畫什麼"
     out = [f"# 第{_zh(n)}話：{plan['title']}\n",
            f"**話型：{kind}**　" + wish_line + '\n',
-           plan['desc'] + '\n', '## 三個轉折\n']
+           plan['desc'] + '\n', f'## {_zh(len(plan["beats"]))}個轉折\n']
     out += [f'{i}. {b}' for i, b in enumerate(plan['beats'], 1)]
     if wish_err is not None:
         out.append('\n## 許願讀取失敗\n')
