@@ -200,21 +200,37 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
    cast-lock 三條規矩摘要、驗收怎麼做。`tools/` 也補上了（`build.py`、`check.py`、
    `count_limbs.py`），附上游來源以便同步。授權分開處理：程式碼 MIT、角色素材 CC BY-NC。
 
-8. **把 `scripts/` 與 `.github/workflows/` 搬過來**（尚未做，README 已註明產線還沒接上）。
+8. **把產線與網站搬過來**（尚未做，README 已註明產線還沒接上）。
 
-   不是 `cp` 就好。`next_episode.py` 有 1382 行，其中 **6 處寫死 `yazelin/neko-tensei`**
-   要參數化：
+   **發表點決定了：漫畫發表在這個 repo 自己的 GitHub Pages 上**，`ai-brain-site`
+   之後用自訂 app 的 iframe 內嵌進來（那個功能還在做）。所以是**一個發表點加一扇窗**，
+   不是兩個發表點。樣板要附完整網站，學員 fork 完跑一次就拿到一個能分享的網址。
 
-   - GraphQL 查詢裡的 `repository(owner:"yazelin", name:"neko-tensei")`
-   - `UA` 字串
-   - PR 內文組圖片網址用的兩處 `raw.githubusercontent.com/yazelin/neko-tensei`
-   - `GEMINI_BASE` 與 `IMG_BASE` 的預設值（這兩個已經寫進 README 的「一定會踩的坑」）
+   一個要記得的坑：兩邊都在 `yazelin.github.io` 底下，**同源代表共用 localStorage**。
+   漫畫站的閱讀進度和格莉奇OS 的聊天記錄會撞在同一個 storage，key 要先講好前綴。
+   Service Worker 那邊沒事，scope 是按路徑分的。
 
-   還會連帶拉進整套 PWA 網站產生的邏輯（`ep/*.html`、`sw.js`、manifest），
-   那些對樣板不一定需要。**搬之前要先決定樣板要不要附網站**，還是只出圖、
-   讓學員自己決定怎麼發表。
+   搬運範圍分兩階段做，中間有一個可驗證的檢查點：
 
-`scripts/` 與 `.github/workflows/` 整份沿用 neko-tensei 的，後端切換全靠環境變數。
+   **階段一：產線（能出圖就算過）**
+
+   - `scripts/next_episode.py`（1382 行）、`prompt.py`、`verify_pages.py` 與三支測試
+   - `.github/workflows/next-episode.yml`
+   - **6 處寫死 `yazelin/neko-tensei` 要參數化**：GraphQL 查詢的
+     `repository(owner:..., name:...)`、`UA` 字串、PR 內文組圖片網址的兩處
+     `raw.githubusercontent.com`、`GEMINI_BASE` 與 `IMG_BASE` 的預設值
+     （後兩個已經寫進 README 的「一定會踩的坑」）
+
+   **階段二：網站（Pages 開得起來就算過）**
+
+   - `build.py`（網站產生器，從 `episodes.json` 生閱讀頁、首頁列表、sitemap、
+     `sw.js` 快取清單）
+   - 站殼：`index.html`、`style.css`、`app.js`、`sw.js`、`manifest.json`、`robots.txt`
+   - `partials/footer.html`
+
+   **這兩樣要重做，不是複製得來的**：`assets/` 的 favicon、PWA 圖示與 og 圖，
+   以及 `char/*.html` 角色介紹頁（neko-tensei 有四隻貓，我們要寫格莉奇與黑洞先生）。
+   giscus 的討論區分類 id 也要在新 repo 重開。
 
 ## cast-lock 怎麼進來
 
