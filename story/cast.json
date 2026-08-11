@@ -14,13 +14,13 @@
       "name": "格莉奇",
       "ref": "story/refs/glitch.webp",
       "desc": "GLITCH model sheet (front, side, back)",
-      "sheet": "GLITCH: a small pale girl, the shorter of the two. Short mint-and-lavender gradient bob with ONE long ahoge standing up from the crown. TWO grey antenna devices with teal screen panels, one on each side of her head, standing up like small aerials - they are hardware, not animal ears. TWO dark bar-shaped hair clips on one side. Small solid pixel blocks in pink, teal and purple float in the air around her hair; they are part of her, they appear in every panel. Large teal-green eyes. Small square pixel blush marks on her cheeks. A dark choker. An oversized pale iridescent hoodie with dark navy stripes on the sleeves; on the chest an orange ERROR plate sits above a grey pixel-art cat face. A dark device with a teal screen on one wrist. Iridescent transparent straps hang from the waist. Dark navy skirt, bare legs, white-and-lavender high-top sneakers with pink accents and a mint-green panel on the tongue. She wears NO hat of any kind and NO glasses.",
+      "sheet": "GLITCH: a small pale girl, the shorter of the two. Short mint-and-lavender gradient bob with ONE long ahoge standing up from the crown. TWO grey antenna devices with teal screen panels, one on each side of her head, standing up like small aerials - they are hardware, not animal ears. TWO dark bar-shaped hair clips on one side. Small solid pixel blocks in pink, teal and purple float in the air around her hair; they are part of her, they appear in every panel. Large teal-green eyes. Small square pixel blush marks on her cheeks. A dark choker. An oversized pale iridescent hoodie with dark navy stripes on the sleeves; on the chest an orange ERROR plate with the letters ERROR sits above a grey cat face drawn as blocky 8-bit PIXEL ART made of square blocks. That cat face is a picture, NEVER a written character or word - do not replace it with any Chinese character. A dark device with a teal screen on one wrist. Iridescent transparent straps hang from the waist. Dark navy skirt, bare legs, white-and-lavender high-top sneakers with pink accents and a mint-green panel on the tongue. She wears NO hat of any kind and NO glasses.",
       "must": [
         "薄荷加薰衣草的短鮑伯,頭頂一根長呆毛",
         "頭側兩個灰色天線裝置,上面有青色螢幕面板",
         "同一側兩支深色條狀髮夾",
         "頭髮周圍飄著粉紅、青綠、紫色的實心像素方塊",
-        "胸口橘色 ERROR 牌,底下一個灰色像素貓臉",
+        "胸口橘色 ERROR 牌(上面有 ERROR 字樣),底下一個由方塊組成的灰色像素貓臉",
         "深色 choker",
         "單邊手腕上一個帶青色螢幕的深色裝置",
         "腰間垂下的彩虹透明吊帶",
@@ -30,7 +30,8 @@
         "任何帽子(她從不戴帽,黑洞先生才有禮帽)",
         "眼鏡",
         "長髮、馬尾或雙馬尾(她是短鮑伯)",
-        "把頭側的天線裝置畫成動物耳朵"
+        "把頭側的天線裝置畫成動物耳朵",
+        "把胸口的像素貓臉畫成中文字或任何文字(那是一張圖不是字)"
       ]
     },
     "blackhole": {
