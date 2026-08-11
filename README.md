@@ -1,6 +1,7 @@
 # ai-comic-starter
 
-用 AI 自動出漫畫的產線樣板。Fork 下來、填四個 secret、按一次 Run workflow，就會出一頁。
+用 AI 自動出漫畫的產線樣板。目標是 fork 下來、填幾個 secret、按一次 Run workflow
+就出一頁，**產線那半還在搬，現在還不能一鍵出圖**（見下一節）。
 
 這是 [neko-tensei](https://github.com/yazelin/neko-tensei) 那條產線的入門版：角色與世界觀
 換成一組現成可用的，讓「跑通產線」跟「創作自己的角色」變成兩件事。
