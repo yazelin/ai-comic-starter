@@ -12,7 +12,17 @@ CHARACTER:
 - TROUSERS: navy suit trousers over two of the legs only; the other four are bare.
 
 HOW TO STAGE THE LEGS SO ALL SIX ARE COUNTABLE IN PROFILE:
-Spread the six legs along the front-to-back axis like a walking centipede, so that from this side angle the six boots form a clearly separated line receding into the distance. The nearest boot is largest and lowest in frame; each boot behind it is slightly smaller and slightly higher. NO boot may be completely hidden behind another. There must be exactly six distinct boots touching the ground, each fully drawn.
+The six legs radiate outward from the body like an octopus standing still, so from this
+side angle they naturally sit at six different depths. The nearest boot is largest and
+lowest in frame; each boot further away is slightly smaller and slightly higher. NO boot
+may be completely hidden behind another. There must be exactly six distinct boots.
+
+THE POSE IS STANDING STILL, NOT WALKING:
+All six boots are flat on the ground, planted, bearing weight. NO boot is lifted, tilted
+onto its toe, or raised off the floor. The body is upright and does not lean forward or
+backward. The legs hang and splay evenly; none is swung forward or trailing behind as if
+mid-stride. This must read as a character standing at rest, the same stance as a
+front-view A-pose seen from the side.
 
 MUST NOT APPEAR:
 - any text, letters, numbers, labels, arrows, logos or watermarks
@@ -20,5 +30,6 @@ MUST NOT APPEAR:
 - human legs, feet, hands or fingers
 - five legs, or seven legs, or any number of boots other than six
 - a second hat, glasses, or a tie
+- any walking, striding or marching pose; any lifted or tip-toed boot; a forward-leaning body
 
 RENDERING: soft 3D collectible-figure render, matte felt and wool materials, even studio lighting, soft contact shadow under each boot. Plain flat off-white background.
