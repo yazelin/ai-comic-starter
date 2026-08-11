@@ -1,10 +1,12 @@
 # 計劃書
 
 這個 repo 是 [neko-tensei](https://github.com/yazelin/neko-tensei) 漫畫產線的**入門樣板**。
-目標讀者是 8/19 漫畫產線實作營的學員：fork 下來、填自己的金鑰、按一次
-Run workflow，當晚就帶得走一頁真的漫畫。
+目標讀者是漫畫產線實作營的學員：fork 下來、填自己的金鑰、按一次 Run workflow，
+當晚就帶得走一頁真的漫畫。
 
-現在還沒有內容，只有這份計劃。動手之前先讀完。
+**檔期未定（2026-08-11）**：原本排 8/19，但浮水印教學站可能先排，所以沒有時間壓力。
+
+**進度：七步走完前四步。** 動手之前先讀完這份，尤其是每一步底下記的踩雷。
 
 ## 為什麼需要它
 
@@ -39,7 +41,7 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
 | 條件 | 現況 |
 |---|---|
 | 素材 | 全身立繪（去背）、頭像，以及 **9 張貼圖等於 9 個現成表情姿勢** |
-| 辨識道具 | 薄荷髮加呆毛、胸口 ERROR 補丁、pixel glitch 碎片、choker、斜背包、單腳過膝襪（不對稱） |
+| 辨識道具 | 薄荷髮加呆毛、頭側兩個天線裝置、胸口 ERROR 牌、pixel glitch 方塊、choker、手腕裝置、彩虹透明吊帶 |
 | 世界觀 | 已經有：4KB 記憶體設定、glitch OS、每日日記產線、Giscus 討論區、專屬單曲 |
 | 畫風 | 動漫插畫，跟 neko-tensei 同一個家族 |
 
@@ -85,8 +87,8 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
    改設定時從那份改，不要重寫。
 
    鎖住的特徵（驗收時逐項對照）：星系球體頭、卡其禮帽加深棕帽帶、炭藍西裝加白襯衫、
-   兩隻觸手臂從袖口伸出、**六隻觸手腿各穿一隻黑色短靴**、觸手內側整排吸盤、
-   西裝褲只套在中間兩隻腿上。
+   兩隻觸手臂從袖口伸出、**六隻觸手腿各穿一隻黑色短靴**、觸手內側整排吸盤。
+   西裝褲只出現在正面與背面（見下方「接受的偏差」）。
 
    **目前是第三版，三個視圖都是六隻腳**（用 `count_limbs.py --views 3 --expect 6`
    機械驗過，不是用眼睛看的）。
@@ -185,9 +187,7 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
 6. **`episodes.json`**：第一話的骨架。
 7. **README**：fork 之後要改什麼、要設哪些 secret。
 
-`balloon_ref`（七種對話框圖表）整份沿用 neko-tensei 的，跟角色無關。
-
-`scripts/` 與 `.github/workflows/` 也整份沿用，後端切換全靠環境變數。
+`scripts/` 與 `.github/workflows/` 整份沿用 neko-tensei 的，後端切換全靠環境變數。
 
 ## cast-lock 怎麼進來
 
@@ -213,7 +213,7 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
 
 另外 `OPENAI_MAX_TOKENS` 預設 32768，這是最常見的陷阱。
 
-## 8/19 課程流程
+## 課程流程
 
 先給成功經驗，再教原理，再讓學員自己來。
 
@@ -225,7 +225,7 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
 | 三 | 換成你的角色，再出一頁 | 25 分 |
 | 四 | 驗收：逐格對照劇本找縫 | 15 分 |
 
-前置條件維持報名頁寫的那條：電腦上有 Claude Code 或 Codex CLI 這類 AI 編碼工具，
+前置條件維持原報名頁寫的那條：電腦上有 Claude Code 或 Codex CLI 這類 AI 編碼工具，
 而且用過至少一次。有 Agent 簡化的不是操作，是**除錯**（金鑰貼錯、JSON 少一個逗號、
 workflow 紅了看不懂），沒有的話一個人卡住就要等講師。
 
