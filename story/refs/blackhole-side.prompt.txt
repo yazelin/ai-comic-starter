@@ -1,0 +1,24 @@
+ONE character, ONE view only: a full-body SIDE view (profile, facing right), standing in a neutral stance, centred on a plain flat off-white background.
+
+REFERENCE IMAGES:
+- Image 1: the same character, full body, front view. This is the definitive design.
+
+CHARACTER:
+- HEAD: a smooth dark navy-black sphere with a soft luminous spiral galaxy across it and scattered white star specks. In profile only ONE eye is visible: a large white almond eye with a heavy upper lid. One small closed smile. No neck.
+- HAT: a tan/camel felt fedora with a dark brown grosgrain band.
+- TORSO: a charcoal navy suit jacket with notch lapels over a white collared shirt. No tie.
+- ARMS: exactly TWO boneless tentacle arms in galaxy starfield texture emerging from the jacket sleeves past white shirt cuffs. Rounded tips, no hands.
+- LEGS: exactly SIX tentacle legs in galaxy starfield texture, each with a row of small round suckers down one side, each ending in its own black leather Chelsea ankle boot. SIX legs and SIX boots, no more and no fewer.
+- TROUSERS: navy suit trousers over two of the legs only; the other four are bare.
+
+HOW TO STAGE THE LEGS SO ALL SIX ARE COUNTABLE IN PROFILE:
+Spread the six legs along the front-to-back axis like a walking centipede, so that from this side angle the six boots form a clearly separated line receding into the distance. The nearest boot is largest and lowest in frame; each boot behind it is slightly smaller and slightly higher. NO boot may be completely hidden behind another. There must be exactly six distinct boots touching the ground, each fully drawn.
+
+MUST NOT APPEAR:
+- any text, letters, numbers, labels, arrows, logos or watermarks
+- a front view or a back view; this image contains ONE figure in profile only
+- human legs, feet, hands or fingers
+- five legs, or seven legs, or any number of boots other than six
+- a second hat, glasses, or a tie
+
+RENDERING: soft 3D collectible-figure render, matte felt and wool materials, even studio lighting, soft contact shadow under each boot. Plain flat off-white background.
