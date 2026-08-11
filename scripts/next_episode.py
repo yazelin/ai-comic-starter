@@ -280,7 +280,11 @@ def _lines(plan):
                 yield pg.get('n'), ln.get('speaker'), ln.get('shape'), ln.get('text')
 
 
-def validate_plan(plan, next_n, titles):
+PAGE_COUNT = 6          # 一話的內頁數。--pages 可以蓋掉,主要給「先出一頁確認
+                        # 整條線通了」用。starter 的核心承諾就是先拿到成功經驗。
+
+
+def validate_plan(plan, next_n, titles, pages_expected=None):
     """驗企劃。回問題清單,空清單代表通過。
 
     這是花掉出圖額度之前唯一的守門員,寧可嚴一點——擋錯了頂多重跑一次企劃,
@@ -304,35 +308,38 @@ def validate_plan(plan, next_n, titles):
     if errs:
         return errs
 
-    # 異世界元素必填,而且要真的是異世界的東西。
+    # 「這一話必須畫出某類東西」是可設定的,不是內建規則。
     #
-    # 光在 prompt 裡要求沒有用:第二話到第六話連續五話的舞台都是機房,而
-    # planner prompt 會把「最近兩話的分鏡」整段餵進去要它接得上——文字要求
-    # 打不過示範。改成必填欄位,模型至少得**明說**這一話的異世界元素是什麼,
-    # 而且人在 PR 上看得到它填了什麼。
-    fantasy = (plan.get('fantasy') or '').strip()
-    if not fantasy:
-        errs.append('缺欄位:fantasy(這一話畫面上真的會出現的異世界元素)')
-    elif not any(c.isalpha() for c in fantasy):
-        errs.append(f'fantasy 要寫一句英文,拿到:{fantasy}')
-    else:
-        banned = [w for w in FANTASY_BANNED if w in fantasy.lower()]
-        if banned:
-            errs.append(f'fantasy 填的是機房那一類的東西({"、".join(banned)}):{fantasy}'
-                        '。要的是怪物、魔法戰鬥、地形、村民 NPC 這種只有異世界才有的')
+    # 來歷:某部作品連續五話的舞台都漂回機房,而 planner 會把最近兩話整段餵進去
+    # 要它接得上,文字要求打不過示範。解法是加一個必填欄位,逼模型明說這一話的
+    # 那樣東西是什麼,人在 PR 上也看得到。
+    #
+    # 但那是**那部作品**的問題。別的作品可能正好相反——這個樣板的故事就發生在
+    # 機房裡,把 screen/server/keyboard 列成禁用詞會直接擋掉主場景。所以改成
+    # 讀 episodes.json 的 site.require_field,沒設就完全不檢查。
+    req = _require_field()
+    if req:
+        val = (plan.get(req['field']) or '').strip()
+        if not val:
+            errs.append(f"缺欄位:{req['field']}({req.get('hint', '')})")
+        elif req.get('banned'):
+            hit = [w for w in req['banned'] if w in val.lower()]
+            if hit:
+                errs.append(f"{req['field']} 填的是被排除的那一類({'、'.join(hit)}):{val}")
 
     if plan['title'] in (titles or []):
         errs.append(f'標題與既有話數重複:{plan["title"]}')
 
+    want = PAGE_COUNT if pages_expected is None else pages_expected
     pages = plan['pages']
-    if len(pages) != 6:
-        errs.append(f'內頁必須六頁,拿到 {len(pages)} 頁')
+    if len(pages) != want:
+        errs.append(f'內頁必須 {want} 頁,拿到 {len(pages)} 頁')
 
-    # 頁碼必須是 01~06 各一次,不能重複也不能亂編——重複的話同一頁會被
+    # 頁碼必須是 01 起連號各一次,不能重複也不能亂編——重複的話同一頁會被
     # 出兩張圖或漏掉別頁,順序錯了 build.py 排版會照檔名排,話就亂了。
     page_ns = [pg.get('n') for pg in pages]
-    if set(page_ns) != {f'{i:02d}' for i in range(1, 7)} or len(page_ns) != len(set(page_ns)):
-        errs.append(f'頁碼必須是 01~06 各一次不重複,拿到:{page_ns}')
+    if set(page_ns) != {f'{i:02d}' for i in range(1, want + 1)} or len(page_ns) != len(set(page_ns)):
+        errs.append(f'頁碼必須是 01~{want:02d} 各一次不重複,拿到:{page_ns}')
 
     for pg in pages:
         n = pg.get('n')
@@ -430,10 +437,8 @@ OPENAI_MAX_TOKENS = int(os.environ.get('OPENAI_MAX_TOKENS') or 32768)
 
 _PLAN_SHAPE = """{
   "title": "不含「第N話」三個字的標題",
-  "kind": "推進主線 | 日常番 | 烏龍 | 角色刻畫",
   "desc": "一到兩句,給網站 meta description 用",
-  "fantasy": "這一話畫面上真的會出現的異世界元素,一句英文。怪物/魔法戰鬥/地形/村民 NPC/非現實道具都算;螢幕、主機房、全像投影、程式碼不算",
-  "beats": ["轉折一", "轉折二", "轉折三"],
+%REQUIRE_FIELD%  "beats": ["轉折一", "轉折二", "轉折三"],
   "pages": [
     { "n": "01",
       "chars": ["出場角色的 slug"],
@@ -448,19 +453,42 @@ _PLAN_SHAPE = """{
 
 
 # fantasy 欄位不可以填這些——它們正是這部作品已經寫到爛的那一類。
-FANTASY_BANNED = ('server', 'hologram', 'holographic', 'screen', 'console',
-                  'terminal', 'code', 'commit', 'merge', 'pull request',
-                  'dashboard', 'keyboard', 'monitor', 'data center')
 
-EPISODE_KINDS = """這一話可以是下面任何一種，你自己選最適合的，不必每一話都推進主線：
 
-- **推進主線**：收伏筆、往黑塔走
-- **日常番**：不推進劇情，就是四貓在異世界過日子
-- **烏龍**：能力出包、誤會、雞飛狗跳
-- **角色刻畫**：挖某一位的性格或過去
 
-一年五十二話沒辦法每話都推伏筆，硬推會把線燒完。但不管哪一種，都不可以跟
-既有設定矛盾，角色性格也不能走鐘。"""
+def _require_field():
+    """讀 episodes.json 的 site.require_field。沒設就回 None,代表不檢查。
+
+    形狀:{"field": "fantasy", "hint": "一句話說明", "banned": ["screen", ...]}
+    """
+    try:
+        return json.loads((ROOT / 'episodes.json').read_text('utf-8'))['site'].get('require_field')
+    except Exception:
+        return None
+
+
+def _plan_shape():
+    """企劃 JSON 的形狀。必填欄位是可設定的,沒設就不出現在範本裡。"""
+    req = _require_field()
+    line = (f'  "{req["field"]}": "{req.get("hint", "")}",\n') if req else ''
+    return _PLAN_SHAPE.replace('%REQUIRE_FIELD%', line)
+
+
+def _example_scene():
+    """給編劇看的 scene 寫法範例,用本作品的角色代號組出來,不寫死別人的角色。"""
+    tags = list(CHAR_TAGS.values())
+    if len(tags) >= 2:
+        return (f"{tags[0]} stands at the right, arms raised in panic, "
+                f"while {tags[1]} watches from the left")
+    return f"{tags[0]} stands at the centre, arms raised in panic" if tags else ""
+
+
+def _series_title():
+    """作品名。從 episodes.json 的 site.title 讀,不要寫死。"""
+    try:
+        return json.loads((ROOT / 'episodes.json').read_text('utf-8'))['site']['title']
+    except Exception:
+        return '這部作品'
 
 
 def _world_hint():
@@ -479,7 +507,7 @@ def build_planner_prompt(canon, wishes, previous_errors=None):
                        + '\n'.join(f'- {e}' for e in previous_errors)
                        + '\n這些不是建議,是硬性規則。修的時候不要只補一格,'
                          '整份重看一遍有沒有同類問題。')
-    return f"""你是《轉生成貓貓的我們》的編劇。請企劃第 {canon['next_n']} 話。
+    return f"""你是《{_series_title()}》的編劇。請企劃第 {canon['next_n']} 話。
 
 這部作品的創作規範（必須遵守）：
 ────────
@@ -493,13 +521,11 @@ def build_planner_prompt(canon, wishes, previous_errors=None):
 
 {wish_block}
 
-{EPISODE_KINDS}
-
 請輸出**純 JSON**，不要 markdown 圍籬、不要任何說明文字。格式：
-{_PLAN_SHAPE}
+{_plan_shape()}
 
 硬性要求：
-- 內頁正好 6 頁，每頁 2 到 3 個分格
+- 內頁正好 {PAGE_COUNT} 頁，每頁 2 到 3 個分格
 - `shape` 只能是這七種之一：{' / '.join(sorted(prompt.SHAPES))}
 - 角色 slug 只能是：{' / '.join(sorted(CHARS))}
 - `world` 只能填這些 id：{' / '.join(prompt.WORLD_KEYS) or '（目前沒有）'}
@@ -511,25 +537,15 @@ def build_planner_prompt(canon, wishes, previous_errors=None):
 - **每一格的 `scene` 必須點名這一格所有說話的角色,並寫出他們在畫面的位置。**
   用英文代號:{'、'.join(f'{k}={v}' for k, v in CHAR_TAGS.items())}。位置用相對詞(left / center / right / foreground /
   behind)。生圖端讀的是 `scene` 那段英文,`speaker` 只是給人看的標籤——沒被
-  `scene` 提到的角色,模型會自己補一隻,而它補出來的通常是別人。第六話六頁裡
-  有四頁犯這個錯,「老夫」的台詞連續被畫給戴眼鏡的小鳥不啾。
-  寫成「SAMURAI CAT stands at the right, hands raised in panic, while ROGUE CAT
-  types at the left」這種,不要只寫一隻然後掛三句別人的台詞。
-  兩種簡寫可以用:群像格寫 "all four cats" 就代表四貓都在(小次郎要另外點名);
-  **有人在畫外說話,就寫 "SAMURAI CAT speaks from off-panel"——一樣要點名**,
-  這樣生圖端才知道那句話不屬於畫面裡的任何一隻
-- **這是異世界,不是機房。** 每一話至少要有一樣**只有異世界才有**的東西真的出現
-  在畫面上:怪物、魔法戰鬥、地形、村民 NPC、非現實的道具。工程師的哏是這部的
-  笑點來源,但它只能當**比喻**——魔力是配給的、黑塔會例行維護——不可以整話
-  的舞台就是一個機房、四隻貓圍著螢幕打字。落差要成立,異世界那一邊得真的存在。
-  最近幾話已經連續五話都在辦公室裡,這一話要把場景拉回異世界。
-  **`fantasy` 欄位要填你這一話真的會畫出來的那樣東西**(例:a moss-covered stone
-  golem guarding a ravine),而且它要在至少兩頁的 `scene` 裡真的出現。填螢幕、
-  主機房、全像投影、程式碼一律不算,那些是辦公室搬過來的
-- **`scene` 裡的動作要符合角色的身體**。寫動作之前先想一下這個角色有沒有那個
-  部位：黑洞先生沒有手指，他的觸手末端是圓的，「握住」「捏起」對他不成立，
-  要寫成「捲起」「托著」。模型會很聽話地照你寫的畫，姿勢卡在中間，人一眼就看得出
-  不對。真要用奇怪的方式做事，得是刻意的笑點，而且要跟角色個性對得上{retry_block}"""
+  `scene` 提到的角色,模型會自己補一隻,而它補出來的通常是別人。實測有一話
+  六頁裡四頁犯這個錯,同一個角色的台詞連續被畫給另一個人。
+  寫成「{_example_scene()}」這種,不要只寫一個角色然後掛三句別人的台詞。
+  兩種簡寫可以用:全員都在畫面上時寫 "{GROUP_PHRASES[0].lower()}";
+  **有人在畫外說話,就寫 "{list(CHAR_TAGS.values())[0]} speaks from off-panel"
+  ——一樣要點名**,這樣生圖端才知道那句話不屬於畫面裡的任何一個角色
+- **`scene` 裡的動作要符合角色的身體。** 寫動作之前先想一下這個角色有沒有那個
+  部位。模型會很聽話地照你寫的畫,姿勢卡在中間,人一眼就看得出不對。
+  哪個角色缺哪個部位,看上面的創作規範與角色設定{retry_block}"""
 
 
 def _strip_fence(s):
@@ -1042,44 +1058,43 @@ def _img_codex(name, keys, body, out):
 IMG_RETRIES = 3
 
 
-SERIES_TITLE = '轉生成貓貓的我們'
+def _cover_style():
+    """封面的版型與字體描述。從 episodes.json 的 site.cover_style 讀。
+
+    這一段是每部作品自己的招牌長相(字體、描邊、名牌樣式),不該寫死在程式裡。
+    沒設就給一個中性的預設,至少畫得出一張有標題的封面。
+    """
+    try:
+        v = json.loads((ROOT / 'episodes.json').read_text('utf-8'))['site'].get('cover_style')
+    except Exception:
+        v = None
+    return v or ("large bold hand-drawn Chinese display type with a thick outline and a "
+                 "soft drop shadow, sitting across the upper half in one or two lines")
 
 
 def cover_body(plan, n):
     """封面的畫面描述,含標題、角色名牌與底部話數帶。
 
-    pipeline 一開始刻意讓封面完全無字,理由是「文字烤進圖裡,改一個字就是整張
-    重生」。那個理由本身沒錯,但它沒看既有封面長什麼樣——第一、二話的標題就是
-    AI 畫進去的(story/README.md 有一整段在講外稿封面的錯字怎麼修,會有錯字正
-    代表那些字是模型畫的),結果第三話變成整個系列裡唯一沒標題的封面。所以改回
-    烤字,並把第二話封面當參考圖鎖版面。
-
-    代價要認:中文字可能出錯,每次改字要整張重生,出稿後必須逐字校對。錯字的
-    修法在 story/README.md——像素級補字之後還要再丟回去重繪一次。
+    封面刻意帶字。文字烤進圖裡代表改一個字就是整張重生,這個代價要認:出稿後
+    必須逐字校對。反過來,沒有標題的封面在一整個系列裡會很突兀。
 
     開頭那句反指令是要壓掉 prompt.BASE 寫死的「THREE horizontal panels」——
     封面是單張圖,而 body 排在整份 prompt 最後面,才蓋得掉前面的分鏡指令。
     """
     beats = '; '.join(plan.get('beats') or [])
+    who = '、'.join(f'the {v}' for v in CHAR_TAGS.values())
     tags = '、'.join(f'「{v}」' for v in NAME.values())
     band = f"第{_zh(n)}話：{plan.get('title', '')}"
     return (f"A single dramatic cover illustration, NOT a multi-panel page.\n"
-            f"All five cats together in one heroic group composition: the MAGE CAT, "
-            f"the SWORDSMAN CAT, the SAMURAI CAT, the ROGUE CAT, and looming behind them "
-            f"the DEMON KING CAT.\n"
+            f"The whole cast together in one group composition: {who}.\n"
             f"The mood and setting come from this episode: {plan.get('desc', '')}\n"
             f"Key moments of the episode, use them to choose the setting and lighting: {beats}\n"
             f"LAYOUT AND LETTERING - copy the layout of reference image 2 exactly:\n"
-            f"- The series title 「{SERIES_TITLE}」 across the upper half in two lines, "
-            f"large chunky hand-drawn Chinese display type, thick gold outline, dark drop "
-            f"shadow, the two characters 貓貓 in bright pink and the rest in near-black, "
-            f"with a few small paw-print marks tucked around the letters.\n"
-            f"- One small dark rounded name tag beside each cat, each with a little paw icon "
-            f"and that cat's name: {tags}. Put each tag next to the cat it names.\n"
-            f"- A slim band along the very bottom edge with a paw icon and the text "
-            f"「{band}」.\n"
-            f"Portrait aspect ratio 2:3, same painterly vibrant anime fantasy style as "
-            f"reference image 1.")
+            f"- The series title 「{_series_title()}」 in {_cover_style()}.\n"
+            f"- One small rounded name tag beside each character with that character's "
+            f"name: {tags}. Put each tag next to the character it names.\n"
+            f"- A slim band along the very bottom edge with the text 「{band}」.\n"
+            f"Portrait aspect ratio 2:3, same art style as reference image 1.")
 
 
 def cover_refs(plan):
@@ -1367,7 +1382,16 @@ def main(argv=None):
     ap.add_argument('--plan-from', metavar='FILE', help='跳過 LLM,用現成的企劃 JSON')
     ap.add_argument('--plan-only', metavar='FILE', help='只出企劃,存成 FILE 後結束')
     ap.add_argument('--skip-images', action='store_true', help='不出圖,其餘照跑')
+    ap.add_argument('--pages', type=int, metavar='N',
+                    help='這一話出幾頁內頁(預設 6)。--pages 1 是最短的一條路,\n'
+                         '用來確認金鑰、參考圖、出圖後端整條線是通的')
     a = ap.parse_args(argv)
+
+    if a.pages:
+        # 全域改掉,讓企劃提示詞、驗證、重試三邊看到的是同一個數字。
+        global PAGE_COUNT
+        PAGE_COUNT = a.pages
+        print(f'這一話只出 {PAGE_COUNT} 頁內頁')
 
     canon = load_canon()
     n = canon['next_n']
