@@ -2,7 +2,7 @@
   "site": {
     "title": "格莉奇OS",
     "base": "https://yazelin.github.io/ai-comic-starter/",
-    "credit": "待填：這一話的劇情、分鏡、作畫各是誰做的",
+    "credit": "角色設計：林亞澤．世界觀：林亞澤 × Claude × Gemini．劇本與分鏡：Claude．作畫：GPT image",
     "giscus": {
       "repo": "yazelin/ai-comic-starter",
       "repo_id": "R_kgDOTz1jjg",
@@ -31,7 +31,7 @@
       "title": "你們現在是我的記憶體了",
       "date": "2026-08-12",
       "desc": "格莉奇每天開機都會忘掉昨天。今天她發現「忘掉」等於被黑洞先生吃掉，於是把記憶外包給了讀者。",
-      "credit": "待填：這一話的劇情、分鏡、作畫各是誰做的",
+      "credit": "角色設計：林亞澤．世界觀：林亞澤 × Claude × Gemini．劇本與分鏡：Claude．作畫：GPT image",
       "pages": [
         {
           "f": "00-cover.webp",
