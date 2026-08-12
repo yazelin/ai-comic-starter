@@ -113,7 +113,7 @@
    使用者自己點的按鈕,取消原生對話框不做任何持久靜音——
    同次瀏覽先收起(事件已被消耗,無法再 prompt),Chrome 重發事件或下次載入就會再出現。 */
 (function(){
-  var KEY='nt-install', btn=document.getElementById('inst'), deferred=null;
+  var KEY='glitchos-install', btn=document.getElementById('inst'), deferred=null;
   var v=localStorage.getItem(KEY);
   if(v && v!=='installed')localStorage.removeItem(KEY);   // 清掉舊版寫入的 14 天靜音時間戳
   window.addEventListener('beforeinstallprompt',function(e){
