@@ -38,15 +38,15 @@
       "name": "黑洞先生",
       "ref": "story/refs/blackhole.webp",
       "desc": "MR BLACK HOLE model sheet (front, side, back)",
-      "sheet": "MR BLACK HOLE: the tall one. His head is a smooth dark navy-black sphere with a soft luminous spiral galaxy painted across it and scattered white star specks; there is NO neck, the head sits straight on the shoulders. His face is only TWO large white almond eyes with heavy upper lids giving a calm half-lidded look, plus ONE small closed smile - nothing else, no nose, no eyebrows, no teeth. In profile only one eye is visible. He wears a tan/camel felt fedora with a dark brown grosgrain band, and a charcoal navy single-breasted suit jacket with notch lapels over a crisp white collared shirt buttoned to the top, no tie. Exactly TWO boneless tentacle arms in the same galaxy starfield texture come out of the jacket sleeves past white shirt cuffs; they taper to rounded tips and have NO hands and NO fingers. He stands on exactly SIX tapering tentacle legs in the same galaxy texture, each with a row of small round suckers down its inner side, and each ending in its OWN black leather Chelsea ankle boot - six legs, six boots, never five and never seven. Navy suit trousers cover the middle two legs; the outer four are bare.",
+      "sheet": "MR BLACK HOLE: the tall one. His head is a smooth dark navy-black sphere with a soft luminous spiral galaxy painted across it and scattered white star specks; there is NO neck, the head sits straight on the shoulders. His face is only TWO large white almond eyes with heavy upper lids giving a calm half-lidded look, plus ONE small closed smile - nothing else, no nose, no eyebrows, no teeth. In profile only one eye is visible. He wears a tan/camel felt fedora with a dark brown grosgrain band, and a charcoal navy single-breasted suit jacket with notch lapels over a crisp white collared shirt buttoned to the top, no tie. Exactly TWO boneless tentacle arms in the same galaxy starfield texture come out of the jacket sleeves past white shirt cuffs; they taper to rounded tips and have NO hands and NO fingers. He stands on a BUNCH of tapering tentacle legs in the same galaxy texture, each with a row of small round suckers down its inner side, and each ending in its own black leather Chelsea ankle boot. The number is NOT fixed - draw however many the composition wants, but always MORE THAN FOUR, so the silhouette never reads as a pair of human legs. Navy suit trousers cover two of them; the rest are bare.",
       "must": [
         "星系球體頭,沒有脖子",
         "臉上只有兩隻白色杏仁眼(重眼皮)和一個小小的閉口微笑",
         "卡其色氈質禮帽,深棕色帽帶",
         "炭藍色單排扣西裝外套,裡面白襯衫扣到最上面,沒有領帶",
         "兩隻觸手手臂從袖口伸出,露出白色袖口,末端是圓的",
-        "六隻觸手腿,每一隻都穿一隻黑色切爾西短靴(六隻腿六隻靴)",
-        "觸手內側整排小圓吸盤"
+        "觸手內側整排小圓吸盤",
+        "一叢觸手腿(超過四隻),每一隻都穿一隻黑色切爾西短靴"
       ],
       "must_not": [
         "手掌或手指(他的手臂末端是圓的)",
@@ -54,7 +54,7 @@
         "領帶或領結",
         "眼鏡",
         "第二頂帽子",
-        "五隻腿或七隻腿,五隻靴或七隻靴"
+        "兩條人腿,或少到看起來像人腿的數量(四隻以下)"
       ]
     }
   },
@@ -82,8 +82,7 @@
   },
   "global_rules": [
     "畫風是平塗賽璐璐動漫:乾淨的線稿、平塗色塊、不做厚塗質感。黑洞先生的設定圖是 3D 渲染的,那只鎖他的造型,不鎖畫風,畫進格子裡時要翻譯成同一套平塗畫風",
-    "黑洞先生的腿數是這部作品最容易畫錯的東西。實測:設定圖側視曾經是五隻、規格寫六隻、成品畫成七隻,三個數字互不相同。把數量寫進 must_not 擋不住它,每一格都要真的數過",
-    "數量不要用眼睛驗。跑 paper-puppet-skill 的 count_limbs.py,或用 vision 問「這一格有幾隻穿靴子的腳」,那是閉合式問題比人眼可靠",
+    "黑洞先生的腿數**刻意不固定**。他是黑洞的具現化,本來就沒有腳,那些觸手是他為了裝成紳士長出來的,餓的時候少幾隻、吃飽了多幾隻都合理。只要超過四隻、每隻都穿短靴就對了。門邊那堆備用短靴是這條設定的實體證據,任何一格都可以出現。這條原本是「正好六隻」,實測連續七次生成沒有一次穩定,而且人眼、程式、視覺模型三種數法都不可靠——把一個一定會錯的規格改成不可能錯的,比繼續加規則有效",
     "格莉奇的識別物是一組離散小道具(天線、髮夾、ERROR 牌、手環、吊帶),它們比大輪廓更容易漏,逐格對照 must 清單走一遍",
     "對話框形狀要跟著情緒走,整頁都是圓角矩形就是錯的"
   ]
