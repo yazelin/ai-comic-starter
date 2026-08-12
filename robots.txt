@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yazelin.github.io/neko-tensei/sitemap.xml
+Sitemap: https://yazelin.github.io/ai-comic-starter/sitemap.xml
