@@ -1,10 +1,13 @@
 /* 全站行動版行為。閱讀頁與其他頁共用一支,靠有沒有 main.reader 分流。
-   進度存 localStorage,key 一律 nt- 前綴——yazelin.github.io 是所有 Pages
+   進度存 localStorage,key 一律帶站名前綴——yazelin.github.io 是所有 Pages
    專案共用的 origin,用通名會跟別的專案互相覆蓋。 */
 (function () {
   'use strict';
 
-  var KEY = 'nt-progress';
+  // key 一定要帶前綴。GitHub Pages 的專案站全部同源,沒前綴會跟同一個
+  // 帳號下的其他站互相覆蓋——neko-tensei 用的就是 nt-progress,
+  // 這個站原本抄過來也叫 nt-progress,兩邊的閱讀進度會互相蓋掉。
+  var KEY = 'glitchos-progress';
 
   function readProgress() {
     try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; }
@@ -144,7 +147,7 @@
     var hero = document.querySelector('.hero');
     if (!prog || !hero || !document.body.hasAttribute('data-home')) return;
 
-    // nt-progress 不能當可信輸入:yazelin.github.io 是所有 Pages 專案共用的
+    // 進度不能當可信輸入:yazelin.github.io 是所有 Pages 專案共用的
     // origin,同 origin 的別的專案寫得進這個 key。話數要真的存在(首頁列表上
     // 有對應的 epN.html 連結才算),頁碼要是非負整數,文字一律 textContent。
     var ep = prog.ep, page = prog.page;
