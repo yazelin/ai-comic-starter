@@ -10,6 +10,15 @@ body{margin:0;min-height:100dvh;background:var(--bg);color:var(--ink);
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   line-height:1.9;letter-spacing:.02em;
   background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(90,80,160,.25),transparent);}
+/* 捲軸。沒設的話吃瀏覽器預設那條粗灰的,單獨開已經突兀,嵌進格莉奇OS 的視窗裡
+   更明顯——那邊整站是 8px 半透明細捲軸。用本站自己的金色系,不照抄它的青色。 */
+html{scrollbar-width:thin;scrollbar-color:rgba(232,194,106,.3) transparent}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{min-height:32px;background:rgba(232,194,106,.26);
+  background-clip:padding-box;border:2px solid transparent;border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background:rgba(232,194,106,.45);background-clip:padding-box}
+::-webkit-scrollbar-corner{background:transparent}
 a{color:var(--gold);text-decoration:none}
 a:hover{color:var(--pink)}
 img{max-width:100%;height:auto;display:block}
