@@ -2,7 +2,16 @@
   "site": {
     "title": "格莉奇OS",
     "base": "https://yazelin.github.io/ai-comic-starter/",
-    "credit": "待填：這一話的劇情、分鏡、作畫各是誰做的"
+    "credit": "待填：這一話的劇情、分鏡、作畫各是誰做的",
+    "giscus": {
+      "repo": "yazelin/ai-comic-starter",
+      "repo_id": "R_kgDOTz1jjg",
+      "category_general": "DIC_kwDOTz1jjs4DDL_i",
+      "category_ideas": "DIC_kwDOTz1jjs4DDL_k",
+      "wish_term": "幫她記住"
+    },
+    "cache_prefix": "glitchos",
+    "next_teaser": "她今天有幾隻腳？"
   },
   "characters": [
     {
