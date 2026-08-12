@@ -38,10 +38,10 @@
       "name": "黑洞先生",
       "ref": "story/refs/blackhole.webp",
       "desc": "MR BLACK HOLE model sheet (front, side, back)",
-      "sheet": "MR BLACK HOLE: the tall one. His head is a smooth dark navy-black sphere with a soft luminous spiral galaxy painted across it and scattered white star specks; there is NO neck, the head sits straight on the shoulders. His face is only TWO large white almond eyes with heavy upper lids giving a calm half-lidded look, plus ONE small closed smile - nothing else, no nose, no eyebrows, no teeth. In profile only one eye is visible. He wears a tan/camel felt fedora with a dark brown grosgrain band, and a charcoal navy single-breasted suit jacket with notch lapels over a crisp white collared shirt buttoned to the top, no tie. Exactly TWO boneless tentacle arms in the same galaxy starfield texture come out of the jacket sleeves past white shirt cuffs; they taper to rounded tips and have NO hands and NO fingers. He stands on a BUNCH of tapering tentacle legs in the same galaxy texture, each with a row of small round suckers down its inner side, and each ending in its own black leather Chelsea ankle boot. The number is NOT fixed - draw however many the composition wants, but always MORE THAN FOUR, so the silhouette never reads as a pair of human legs. Navy suit trousers cover two of them; the rest are bare.",
+      "sheet": "MR BLACK HOLE: the tall one. His head is a smooth dark navy-black sphere with a soft luminous spiral galaxy painted across it and scattered white star specks; there is NO neck, the head sits straight on the shoulders. His face carries exactly THREE white marks and nothing else: TWO large white almond eyes with heavy upper lids giving a calm half-lidded look, and ONE closed smile drawn as a clear WHITE curved line. The smile is a solid white stroke, thick enough to stay readable when his head is small in the frame - it is never a thin hairline and never omitted. No nose, no eyebrows, no teeth. In profile only one eye is visible. He wears a tan/camel felt fedora with a dark brown grosgrain band, and a charcoal navy single-breasted suit jacket with notch lapels over a crisp white collared shirt buttoned to the top, no tie. Exactly TWO boneless tentacle arms in the same galaxy starfield texture come out of the jacket sleeves past white shirt cuffs; they taper to rounded tips and have NO hands and NO fingers. He stands on a BUNCH of tapering tentacle legs in the same galaxy texture, each with a row of small round suckers down its inner side, and each ending in its own black leather Chelsea ankle boot. The number is NOT fixed - draw however many the composition wants, but always MORE THAN FOUR, so the silhouette never reads as a pair of human legs. Navy suit trousers cover two of them; the rest are bare.",
       "must": [
         "星系球體頭,沒有脖子",
-        "臉上只有兩隻白色杏仁眼(重眼皮)和一個小小的閉口微笑",
+        "臉上正好三個白色記號:兩隻白色杏仁眼(重眼皮)加一條白色的閉口微笑弧線,那條弧線要夠粗,頭很小的時候也看得見",
         "卡其色氈質禮帽,深棕色帽帶",
         "炭藍色單排扣西裝外套,裡面白襯衫扣到最上面,沒有領帶",
         "兩隻觸手手臂從袖口伸出,露出白色袖口,末端是圓的",
@@ -54,7 +54,8 @@
         "領帶或領結",
         "眼鏡",
         "第二頂帽子",
-        "兩條人腿,或少到看起來像人腿的數量(四隻以下)"
+        "兩條人腿,或少到看起來像人腿的數量(四隻以下)",
+        "沒有嘴(只有兩隻眼睛的臉)"
       ]
     }
   },
@@ -84,6 +85,7 @@
     "畫風是平塗賽璐璐動漫:乾淨的線稿、平塗色塊、不做厚塗質感。黑洞先生的設定圖是 3D 渲染的,那只鎖他的造型,不鎖畫風,畫進格子裡時要翻譯成同一套平塗畫風",
     "黑洞先生的腿數**刻意不固定**。他是黑洞的具現化,本來就沒有腳,那些觸手是他為了撐起西裝、看起來像個人形而長出來的,餓的時候少幾隻、吃飽了多幾隻都合理。只要超過四隻、每隻都穿短靴就對了。門邊那堆備用短靴是這條設定的實體證據,任何一格都可以出現。這條原本是「正好六隻」,實測連續七次生成沒有一次穩定,而且人眼、程式、視覺模型三種數法都不可靠:把一個一定會錯的規格改成不可能錯的,比繼續加規則有效",
     "格莉奇的識別物是一組離散小道具(天線、髮夾、ERROR 牌、手環、吊帶),它們比大輪廓更容易漏,逐格對照 must 清單走一遍",
-    "對話框形狀要跟著情緒走,整頁都是圓角矩形就是錯的"
+    "對話框形狀要跟著情緒走,整頁都是圓角矩形就是錯的",
+    "黑洞先生的微笑實測會系統性消失:第一話七張裡四張沒畫出來。原因是他的臉又小又黑,細線在分格尺度下活不下來。所以規格寫的是「夠粗、頭很小時也看得見的白色弧線」,不是「小小的微笑」。這類「在設定圖上成立、在成品尺度上不成立」的規格,要改的是規格不是重生次數"
   ]
 }

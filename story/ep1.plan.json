@@ -12,174 +12,299 @@
   "pages": [
     {
       "n": "01",
-      "chars": ["glitch", "blackhole"],
-      "world": ["room"],
+      "chars": [
+        "glitch",
+        "blackhole"
+      ],
+      "world": [
+        "room"
+      ],
       "panels": [
         {
           "pos": "top",
           "scene": "Wide establishing shot of the room at night. The holographic screen above the desk on the left glows and lights the floor. On the low bed at the right, GLITCH is curled up asleep under a blanket, only her mint-and-lavender hair and one antenna device showing.",
           "lines": [
-            {"speaker": null, "shape": "CAPTION", "text": "第一話"}
+            {
+              "speaker": null,
+              "shape": "CAPTION",
+              "text": "第一話"
+            }
           ]
         },
         {
           "pos": "mid",
           "scene": "GLITCH sits bolt upright in the bed at the right, blanket falling away, eyes wide, both hands raised. MR BLACK HOLE stands at the left of the frame, calmly holding a thin booklet with one tentacle arm. The pixel glitch blocks around her hair scatter outward.",
           "lines": [
-            {"speaker": "glitch", "shape": "SHOUT", "text": "哇啊啊！有穿西裝的黑色章魚！"}
+            {
+              "speaker": "glitch",
+              "shape": "SHOUT",
+              "text": "哇啊啊！有穿西裝的黑色章魚！"
+            }
           ]
         },
         {
           "pos": "bottom",
           "scene": "Close shot. MR BLACK HOLE at the centre-left, unbothered, holding the booklet up. GLITCH at the right, still clutching the blanket, peeking over it.",
           "lines": [
-            {"speaker": "blackhole", "shape": "OVAL", "text": "同居守則第一千零四版，第一條。"},
-            {"speaker": "glitch", "shape": "WEAK", "text": "一千零四版？"}
+            {
+              "speaker": "blackhole",
+              "shape": "OVAL",
+              "text": "同居守則第一千零四版，第一條。"
+            },
+            {
+              "speaker": "glitch",
+              "shape": "WEAK",
+              "text": "一千零四版？"
+            }
           ]
         }
       ]
     },
     {
       "n": "02",
-      "chars": ["glitch", "blackhole"],
-      "world": ["room"],
+      "chars": [
+        "glitch",
+        "blackhole"
+      ],
+      "world": [
+        "room"
+      ],
       "panels": [
         {
           "pos": "top",
           "scene": "MR BLACK HOLE stands at the left reading from the booklet, one tentacle arm raised. GLITCH sits on the round stool at the right, hands on her knees, listening with an exaggeratedly serious face.",
           "lines": [
-            {"speaker": "blackhole", "shape": "OVAL", "text": "第一條，我不是章魚。"},
-            {"speaker": "glitch", "shape": "OVAL", "text": "喔。"}
+            {
+              "speaker": "blackhole",
+              "shape": "OVAL",
+              "text": "第一條，我不是章魚。"
+            },
+            {
+              "speaker": "glitch",
+              "shape": "OVAL",
+              "text": "喔。"
+            }
           ]
         },
         {
           "pos": "mid",
           "scene": "Same two positions. MR BLACK HOLE at the left turns a page. GLITCH at the right raises one finger as if about to ask something clever.",
           "lines": [
-            {"speaker": "glitch", "shape": "OVAL", "text": "那你是誰？"},
-            {"speaker": "blackhole", "shape": "OVAL", "text": "第二條。這個問題你昨天問過四次。"}
+            {
+              "speaker": "glitch",
+              "shape": "OVAL",
+              "text": "那你是誰？"
+            },
+            {
+              "speaker": "blackhole",
+              "shape": "OVAL",
+              "text": "第二條。這個問題你昨天問過四次。"
+            }
           ]
         },
         {
           "pos": "bottom",
           "scene": "GLITCH at the right beams proudly, both fists on her hips. MR BLACK HOLE at the left lowers the booklet slightly, his half-lidded eyes unchanged.",
           "lines": [
-            {"speaker": "glitch", "shape": "SHOUT", "text": "四次！那我今天一定會記住！"}
+            {
+              "speaker": "glitch",
+              "shape": "SHOUT",
+              "text": "四次！那我今天一定會記住！"
+            }
           ]
         }
       ]
     },
     {
       "n": "03",
-      "chars": ["glitch"],
-      "world": ["room"],
+      "chars": [
+        "glitch"
+      ],
+      "world": [
+        "room"
+      ],
       "panels": [
         {
           "pos": "top",
           "scene": "Close-up on GLITCH at the centre. The orange ERROR plate on her chest lights up bright. Pixel glitch blocks burst outward around her head. Her eyes go blank.",
           "lines": [
-            {"speaker": "glitch", "shape": "TREMBLE", "text": "逼——嗶！"}
+            {
+              "speaker": "glitch",
+              "shape": "TREMBLE",
+              "text": "逼——嗶！"
+            }
           ]
         },
         {
           "pos": "mid",
           "scene": "GLITCH stands alone in the middle of the empty floor, arms limp at her sides, looking down at her own hands. The room around her is dim, only the screen on the left glowing.",
           "lines": [
-            {"speaker": "glitch", "shape": "WEAK", "text": "咦……我剛剛在說什麼？"}
+            {
+              "speaker": "glitch",
+              "shape": "WEAK",
+              "text": "咦……我剛剛在說什麼？"
+            }
           ]
         },
         {
           "pos": "bottom",
           "scene": "GLITCH at the centre-right grips her own head with both hands, antenna devices drooping. Behind her on the left the holographic screen shows a nearly full progress bar.",
           "lines": [
-            {"speaker": "glitch", "shape": "TREMBLE", "text": "四 KB 滿了……今天正在被刪掉！"}
+            {
+              "speaker": "glitch",
+              "shape": "TREMBLE",
+              "text": "四 KB 滿了……今天正在被刪掉！"
+            }
           ]
         }
       ]
     },
     {
       "n": "04",
-      "chars": ["glitch", "blackhole"],
-      "world": ["room"],
+      "chars": [
+        "glitch",
+        "blackhole"
+      ],
+      "world": [
+        "room"
+      ],
       "panels": [
         {
           "pos": "top",
-          "scene": "MR BLACK HOLE stands at the left of the empty floor. He opens one side of his charcoal jacket with a tentacle arm; underneath there is only a deep starless black. GLITCH at the right takes a step back.",
+          "scene": "MR BLACK HOLE stands at the left of the empty floor. Faint glowing fragments are streaming OUT of GLITCH at the right - rising from her head and from the ERROR plate on her chest - and drifting across the room towards him. He opens one side of his charcoal jacket with a tentacle arm to catch them; underneath there is only a deep starless black. GLITCH looks down at the fragments leaving her own chest.",
           "lines": [
-            {"speaker": "blackhole", "shape": "OVAL", "text": "那就當午餐吧。"}
+            {
+              "speaker": "blackhole",
+              "shape": "OVAL",
+              "text": "你掉出來的東西，只有我吃得下。"
+            }
           ]
         },
         {
           "pos": "mid",
-          "scene": "The dark opening under MR BLACK HOLE's jacket at the left pulls faint glowing fragments across the room towards it. GLITCH at the right leans away, one arm shielding her face, her hair and straps blown sideways.",
+          "scene": "The stream of glowing fragments still pours out of GLITCH at the right and is being pulled into the dark opening under MR BLACK HOLE's jacket at the left. GLITCH lunges forward, one arm stretched out trying to catch her own fragments, hair and straps blown sideways.",
           "lines": [
-            {"speaker": "glitch", "shape": "SHOUT", "text": "等一下！那是我的今天！"}
+            {
+              "speaker": "glitch",
+              "shape": "SHOUT",
+              "text": "等一下！那是我的今天！"
+            }
           ]
         },
         {
           "pos": "bottom",
           "scene": "Close shot. MR BLACK HOLE at the left, head tilted slightly, small closed smile unchanged. GLITCH at the right, hands pressed together, pleading.",
           "lines": [
-            {"speaker": "blackhole", "shape": "OVAL", "text": "你存得下嗎？"},
-            {"speaker": "glitch", "shape": "WEAK", "text": "……存不下。"}
+            {
+              "speaker": "blackhole",
+              "shape": "OVAL",
+              "text": "你存得下嗎？"
+            },
+            {
+              "speaker": "glitch",
+              "shape": "WEAK",
+              "text": "……存不下。"
+            }
           ]
         }
       ]
     },
     {
       "n": "05",
-      "chars": ["glitch", "blackhole"],
-      "world": ["room"],
+      "chars": [
+        "glitch",
+        "blackhole"
+      ],
+      "world": [
+        "room"
+      ],
       "panels": [
         {
           "pos": "top",
           "scene": "GLITCH bolts to the desk on the left, both hands slamming onto the keyboard, the holographic screen flaring bright in front of her. MR BLACK HOLE waits at the right of the frame, jacket still open.",
           "lines": [
-            {"speaker": "glitch", "shape": "SHOUT", "text": "我存不下，可是我可以放到外面！"}
+            {
+              "speaker": "glitch",
+              "shape": "SHOUT",
+              "text": "我存不下，可是我可以放到外面！"
+            }
           ]
         },
         {
           "pos": "mid",
           "scene": "Close on the holographic screen above the desk. A packet of glowing fragments lifts off the screen and floats upward out of the top of the panel. GLITCH is at the lower left, watching it go, mouth open.",
           "lines": [
-            {"speaker": "glitch", "shape": "OVAL", "text": "打包……上傳！"}
+            {
+              "speaker": "glitch",
+              "shape": "OVAL",
+              "text": "打包……上傳！"
+            }
           ]
         },
         {
           "pos": "bottom",
           "scene": "MR BLACK HOLE at the left closes his jacket with one tentacle arm. GLITCH at the right stands in front of the desk, both fists raised in triumph.",
           "lines": [
-            {"speaker": "blackhole", "shape": "OVAL", "text": "外面。誰幫你記？"}
+            {
+              "speaker": "blackhole",
+              "shape": "OVAL",
+              "text": "外面。誰幫你記？"
+            }
           ]
         }
       ]
     },
     {
       "n": "06",
-      "chars": ["glitch", "blackhole"],
-      "world": ["room"],
+      "chars": [
+        "glitch",
+        "blackhole"
+      ],
+      "world": [
+        "room"
+      ],
       "panels": [
         {
           "pos": "top",
           "scene": "GLITCH stands at the centre facing straight out of the panel towards the reader, pointing forward with one hand, the other on her hip, grinning. The holographic screen glows behind her on the left.",
           "lines": [
-            {"speaker": "glitch", "shape": "SHOUT", "text": "他們啊！"}
+            {
+              "speaker": "glitch",
+              "shape": "SHOUT",
+              "text": "他們啊！"
+            }
           ]
         },
         {
           "pos": "mid",
           "scene": "GLITCH at the centre-right still facing out of the panel towards the reader, both hands cupped beside her mouth. MR BLACK HOLE stands small at the far left in the background, watching her.",
           "lines": [
-            {"speaker": "glitch", "shape": "SHOUT", "text": "你們現在是我的外接記憶體了！"},
-            {"speaker": "glitch", "shape": "OVAL", "text": "記得留言幫我記住喔，逼——嗶！"}
+            {
+              "speaker": "glitch",
+              "shape": "SHOUT",
+              "text": "你們現在是我的外接記憶體了！"
+            },
+            {
+              "speaker": "glitch",
+              "shape": "OVAL",
+              "text": "記得留言幫我記住喔，逼——嗶！"
+            }
           ]
         },
         {
           "pos": "bottom",
-          "scene": "Wide final shot of the room. GLITCH is asleep on the bed at the right again. MR BLACK HOLE at the left quietly closes the curtain with one tentacle arm. A few stray glowing fragments drift near him.",
+          "scene": "Wide final shot of the room. GLITCH is asleep on the bed at the right again. MR BLACK HOLE at the left quietly closes the curtain with one tentacle arm. A few stray glowing fragments drift near him. Do NOT draw any sound-effect text such as Zzz, and do not add any lettering that is not inside a balloon.",
           "lines": [
-            {"speaker": "blackhole", "shape": "OVAL", "text": "……剩下的我吃掉了。"},
-            {"speaker": null, "shape": "CAPTION", "text": "第一話 完"}
+            {
+              "speaker": "blackhole",
+              "shape": "OVAL",
+              "text": "……剩下的我吃掉了。"
+            },
+            {
+              "speaker": null,
+              "shape": "CAPTION",
+              "text": "第一話 完"
+            }
           ]
         }
       ]
