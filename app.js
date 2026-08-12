@@ -4,6 +4,12 @@
 (function () {
   'use strict';
 
+  // 被嵌在 iframe 裡就標記起來,樣式表據此藏捲軸。用 try 包住:跨網域時
+  // 讀 window.top 會丟例外,而丟例外本身就代表「被嵌在別的網域裡」。
+  try { if (window.top !== window.self) document.documentElement.classList.add('embedded'); }
+  catch (e) { document.documentElement.classList.add('embedded'); }
+
+
   // key 一定要帶前綴。GitHub Pages 的專案站全部同源,沒前綴會跟同一個
   // 帳號下的其他站互相覆蓋——neko-tensei 用的就是 nt-progress,
   // 這個站原本抄過來也叫 nt-progress,兩邊的閱讀進度會互相蓋掉。

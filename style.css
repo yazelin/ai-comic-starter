@@ -11,7 +11,13 @@ body{margin:0;min-height:100dvh;background:var(--bg);color:var(--ink);
   line-height:1.9;letter-spacing:.02em;
   background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(90,80,160,.25),transparent);}
 /* 捲軸。沒設的話吃瀏覽器預設那條粗灰的,單獨開已經突兀,嵌進格莉奇OS 的視窗裡
-   更明顯——那邊整站是 8px 半透明細捲軸。用本站自己的金色系,不照抄它的青色。 */
+   更明顯——那邊整站是 8px 半透明細捲軸。用本站自己的金色系,不照抄它的青色。
+
+   被嵌進 iframe 時整條藏起來(html.embedded):那個情境是「在格莉奇的桌面上開一個
+   app」,看起來要像手機在滑,不是像網頁在捲。捲動本身不受影響。 */
+html.embedded{scrollbar-width:none;-ms-overflow-style:none}
+html.embedded::-webkit-scrollbar{width:0;height:0;display:none}
+html.embedded body{overscroll-behavior:contain}
 html{scrollbar-width:thin;scrollbar-color:rgba(232,194,106,.3) transparent}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-track{background:transparent}
