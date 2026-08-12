@@ -100,6 +100,16 @@ def zh(n):
     return CN[n - 1] if 1 <= n <= 10 else str(n)
 
 
+def img_size(rel):
+    """回傳圖的真實尺寸字串。讀不到就退回預設,不要讓整個 build 掛掉。"""
+    try:
+        from PIL import Image
+        w, h = Image.open(ROOT / rel).size
+        return f'width="{w}" height="{h}"'
+    except Exception:
+        return 'width="1024" height="1536"'
+
+
 def build_episode(ep, prev, nxt):
     h1 = f"第{zh(ep['n'])}話：{ep['title']}"
     url = f"{BASE}ep/{ep["n"]}.html"
@@ -107,8 +117,9 @@ def build_episode(ep, prev, nxt):
                        url=url, base=BASE, n=ep['n'])]
     for i, p in enumerate(ep['pages']):
         extra = ' fetchpriority="high"' if i == 0 else ' loading="lazy"'
-        out.append(f'  <img id="p{i}" src="../images/ep{ep["n"]}/{p["f"]}"\n'
-                   f'       width="1024" height="1536"{extra}\n'
+        rel = f'images/ep{ep["n"]}/{p["f"]}'
+        out.append(f'  <img id="p{i}" src="../{rel}"\n'
+                   f'       {img_size(rel)}{extra}\n'
                    f'       alt="{html.escape(p["alt"], quote=True)}">\n')
     out.append('  <p class="credit">%s</p>\n' % ep['credit'])
     out.append('  <nav class="reader-nav">\n    <a class="btn ghost" href="../">回首頁</a>\n')
@@ -158,8 +169,9 @@ def main():
     # 首頁大圖固定放第一話——這是連載,新讀者的門口是第一話,不是最新一話。
     # 最新一話當輔助入口放在按鈕列,避免大圖直接劇透後面的劇情。
     first, last = EPS[0], EPS[-1]
+    hero_rel = f'images/ep{first["n"]}/{first["pages"][0]["f"]}'
     hero = (f'      <a class="cover" href="ep/{first["n"]}.html" aria-label="開始閱讀第{zh(first["n"])}話">\n'
-            f'        <img src="images/ep{first["n"]}/{first["pages"][0]["f"]}" width="1024" height="1536"\n'
+            f'        <img src="{hero_rel}" {img_size(hero_rel)}\n'
             f'             alt="{html.escape(first["pages"][0]["alt"], quote=True)}" fetchpriority="high">\n'
             f'      </a>\n'
             f'      <div>\n'

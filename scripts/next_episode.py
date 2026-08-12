@@ -907,7 +907,23 @@ def pr_body(plan, n, wishes, wish_err=None, branch=None, verdicts=None):
 
 
 WEBP_QUALITY = 95
-PAGE_W = 1024        # 站上每一頁的寬度,ep/*.html 的 <img> 寫死這個數字
+PAGE_W = 1024        # 站上每一頁的寬度
+PAGE_RATIO = 2 / 3   # 寬高比。分鏡頁與封面都是直式 2:3
+RATIO_TOL = 0.08     # 容差。服務端偶爾會回別的比例(實測回過 864x1821)
+
+
+def check_ratio(im, name=''):
+    """比例跑掉就丟例外,讓 generate_with_retry 重打一次。
+
+    實測服務端回過 864x1821(比例 0.47)而不是要求的 1024x1536(0.67),
+    而 save_image 只在「比 PAGE_W 寬」時才縮,窄的圖會原封不動存下來——
+    沒有任何東西擋得住。一話裡有一頁比例不同,讀起來就是壞的。
+    """
+    r = im.width / im.height
+    if abs(r - PAGE_RATIO) > RATIO_TOL:
+        raise ValueError(
+            f'{name} 比例不對:{im.width}x{im.height}(比例 {r:.3f}),'
+            f'應該接近 {PAGE_RATIO:.3f}')
 
 
 def save_image(raw, out):
@@ -927,9 +943,9 @@ def save_image(raw, out):
     import io
     from PIL import Image
     im = Image.open(io.BytesIO(raw)).convert('RGB')
-    # 站上的 <img> 寫死 width=1024 height=1536,比這更大的圖只是讓 PWA 的
-    # precache 變重。Gemini 那條要 2K(1696×2528)是為了對白銳利,縮回來
-    # 才落檔;codex 那條本來就是 1024,這裡是 no-op。
+    check_ratio(im, out.name)
+    # 比這更大的圖只是讓 PWA 的 precache 變重。Gemini 那條要 2K(1696×2528)
+    # 是為了對白銳利,縮回來才落檔;codex 那條本來就是 1024,這裡是 no-op。
     if im.width > PAGE_W:
         im = im.resize((PAGE_W, round(im.height * PAGE_W / im.width)), Image.LANCZOS)
     im.save(out, 'WEBP', quality=WEBP_QUALITY)
