@@ -46,6 +46,15 @@ python3 tools/count_limbs.py story/refs/blackhole.png --views 3 --expect 6
 （Groq、Ollama、OpenRouter 都是 OpenAI 相容的）。走那條的話注意
 `OPENAI_MAX_TOKENS` 預設 32768，模型吃不下就會回空的，而且不會告訴你原因。
 
+## 怎麼開始
+
+這個 repo 是 **template**，按綠色的 **Use this template** 建一個你自己的 repo，
+不要用 Fork。
+
+差別是實質的：template 產出的是一個乾淨的獨立 repo（單一 commit、沒有上游關聯），
+fork 出來的 repo 頁面上會永遠掛著「forked from」，而且你在自己 repo 下
+`gh pr create` 時預設會指向這裡，那個誤觸很難查。
+
 ## 換成你自己的角色
 
 改三個檔案，`scripts/` 和 workflow 都不用動：
