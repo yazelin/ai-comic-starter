@@ -78,6 +78,9 @@ h2::before{content:"";display:inline-block;width:.55em;height:.55em;margin-right
 /* 角色頁 */
 .char-hero{border-radius:14px;overflow:hidden;border:1px solid var(--line);
   box-shadow:0 10px 40px rgba(0,0,0,.5)}
+/* 圖沒有 width:100% 的話會用原始尺寸顯示,比容器窄就會在右邊露出容器的邊框,
+   而且哪一張露出來要看視窗寬度,看起來像時好時壞。 */
+.char-hero img{display:block;width:100%;height:auto}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0}
 .duo .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem}
 .duo .box h3{margin:.1em 0 .5em;font-size:1.02rem;color:var(--pink)}
