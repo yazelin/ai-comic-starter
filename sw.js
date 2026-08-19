@@ -9,7 +9,7 @@
 /* 版號由 build.py 從清單裡每個檔案的內容算出來,別手改。改殼檔或換圖跑一次
    build.py 就會自己變;要強制所有讀者重來,改 build.py 的 EPOCH。 */
 /* ver:start */
-const SHELL = 'glitchos-shell-v20-3538d030';
+const SHELL = 'glitchos-shell-v20-f121165a';
 const ASSET = 'glitchos-asset-v20-beb14507';
 /* ver:end */
 

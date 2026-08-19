@@ -5,6 +5,7 @@
   "lang": "zh-Hant-TW",
   "start_url": "./",
   "scope": "./",
+  "id": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#12141d",
@@ -27,6 +28,20 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot-narrow.webp",
+      "sizes": "1170x1992",
+      "type": "image/webp",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "images/screenshot-wide.webp",
+      "sizes": "1280x800",
+      "type": "image/webp",
+      "form_factor": "wide"
     }
   ]
 }
