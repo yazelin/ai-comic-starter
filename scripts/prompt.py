@@ -37,10 +37,22 @@ SHAPES = {'SHOUT', 'OVAL', 'WEAK', 'TREMBLE', 'THOUGHT', 'DEMON', 'CAPTION'}
 
 BASE = """Same art style as reference image 1: flat cel-shaded anime, clean confident line art, flat colour blocks with minimal gradients, cool night lighting from screens and neon. No painterly texture, no 3D render look. Vertical manga page, THREE horizontal panels stacked top to bottom, separated by thin white gutters, portrait aspect ratio 2:3."""
 
+def _sheet_of(c):
+    """角色的完整造型描述。
+
+    格莉奇有兩套衣服,所以她的描述拆成 identity(不隨服裝變)加 outfit(這部作品
+    用哪一套);identity 那段跟 ai-brain-site 的 persona.json 逐字相同,由
+    ai-brain-site 的 scripts/check_character_sync.py 把關。黑洞先生只有一套,還是單一個 sheet。
+    """
+    if c.get('identity'):
+        return f"{c['identity']}\n{c.get('outfit', '')}".rstrip()
+    return c.get('sheet', '')
+
+
 SHEET = "\n".join(
     ["CHARACTER SHEET - the model sheets provided as reference images are the authority."
      " Copy every listed feature; a character is wrong if any of these is missing."]
-    + [f"- {v['sheet']}" for v in _CAST['cast'].values() if v.get('sheet')])
+    + [f"- {t}" for t in (_sheet_of(v) for v in _CAST['cast'].values()) if t])
 
 # 「回憶／前世」那類需要另一套畫風的區塊。整段從 cast.json 的 past_block 讀,
 # 沒設就是空的。這是每部作品自己的東西,不該寫死在程式裡。
