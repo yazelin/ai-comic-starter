@@ -61,9 +61,11 @@ fork 出來的 repo 頁面上會永遠掛著「forked from」，而且你在自�
 
 | 檔案 | 放什麼 |
 |---|---|
-| `story/cast.json` | 每個角色的設定圖路徑、`must`（一定要有的特徵）、`must_not`（一定不能有的） |
+| `story/cast.json` | 每個角色的設定圖路徑、造型描述、`must`（一定要有的特徵）、`must_not`（一定不能有的）。造型描述有兩種寫法：只有一套衣服的角色用 `sheet`；有多套衣服的用 `identity`（不隨服裝變的特徵）加 `outfit`（這部作品用哪一套）|
 | `story/README.md` | 世界觀、連載前提、笑點模板、不要出現的東西 |
 | `episodes.json` | 每一話的骨架 |
+
+同一個角色如果還會被別的專案拿去生圖（網站、桌寵、遊戲），把 `identity` 那段在兩邊寫成**逐字相同**的字串，不要各寫各的。樣板附的格莉奇就同時被 [ai-brain-site](https://github.com/yazelin/ai-brain-site) 的 `persona.json` 用著，兩邊漂掉過一次，結果是網站的立繪跟漫畫成品穿的不是同一套衣服。那個 repo 有一支 `scripts/check_character_sync.py` 做逐字比對。
 
 還要放你自己的設定圖到 `story/refs/`。**這一步是整條線最花時間的地方**，不是操作問題，
 是創作問題。樣板附了一組現成的角色就是為了讓你先跳過它、把產線跑通一次再回頭做。

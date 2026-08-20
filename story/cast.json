@@ -14,16 +14,18 @@
       "name": "格莉奇",
       "ref": "story/refs/glitch.webp",
       "desc": "GLITCH model sheet (front, side, back)",
-      "sheet": "GLITCH: a small pale girl, the shorter of the two. Short mint-and-lavender gradient bob with ONE long ahoge standing up from the crown. TWO grey antenna devices with teal screen panels, one on each side of her head, standing up like small aerials - they are hardware, not animal ears. TWO dark bar-shaped hair clips on one side. Small solid pixel blocks in pink, teal and purple float in the air around her hair; they are part of her, they appear in every panel. Large teal-green eyes. Small square pixel blush marks on her cheeks. A dark choker. An oversized pale iridescent hoodie with dark navy stripes on the sleeves; on the chest an orange ERROR plate with the letters ERROR sits above a grey cat face drawn as blocky 8-bit PIXEL ART made of square blocks. That cat face is a picture, NEVER a written character or word - do not replace it with any Chinese character. A dark device with a teal screen on one wrist. Iridescent transparent straps hang from the waist. Dark navy skirt, bare legs, white-and-lavender high-top sneakers with pink accents and a mint-green panel on the tongue. She wears NO hat of any kind and NO glasses.",
       "must": [
         "薄荷加薰衣草的短鮑伯,頭頂一根長呆毛",
-        "頭側兩個灰色天線裝置,上面有青色螢幕面板",
+        "頭側兩個灰色條狀天線裝置,頂端各有一片青色螢幕面板",
         "同一側兩支深色條狀髮夾",
         "頭髮周圍飄著粉紅、青綠、紫色的實心像素方塊",
-        "胸口橘色 ERROR 牌(上面有 ERROR 字樣),底下一個由方塊組成的灰色像素貓臉",
+        "胸口橘紅色 ERROR 牌(上面有 ERROR 字樣),底下一個由方塊組成的灰色像素貓臉",
+        "帽子前方垂下兩條吊帶,左右各一,末端各接一個方形扣具",
+        "帽子背面一個大的灰色像素貓臉",
         "深色 choker",
         "單邊手腕上一個帶青色螢幕的深色裝置",
-        "腰間垂下的彩虹透明吊帶",
+        "長版帽 T 的下擺蓋到大腿上部,下擺以下左右各一條彩虹透明垂環,垂到大腿中段",
+        "裸腿",
         "白紫配色高筒鞋,鞋舌上有薄荷綠色塊"
       ],
       "must_not": [
@@ -31,8 +33,13 @@
         "眼鏡",
         "長髮、馬尾或雙馬尾(她是短鮑伯)",
         "把頭側的天線裝置畫成動物耳朵",
-        "把胸口的像素貓臉畫成中文字或任何文字(那是一張圖不是字)"
-      ]
+        "把胸口的像素貓臉畫成中文字或任何文字(那是一張圖不是字)",
+        "裙子(那是長版帽 T 的下擺,不是裙)",
+        "斜背包、過膝襪、腿套(那些是 Outfit B 的東西,漫畫線固定用 Outfit A)"
+      ],
+      "identity": "GLITCH - IDENTITY. These features never change and never depend on which outfit she is wearing. The character is wrong if any of them is missing. For anything not spelled out here, the three-view model sheet is the authority.\n- A small slim anime-style AI robot GIRL, the shorter of the two leads.\n- Short gradient bob, cyber mint (#7cf3c0) fading into neon purple (#b78bff), with ONE long ahoge standing up from the crown.\n- TWO pale grey bar-shaped ANTENNA DEVICES, one on each side of her head, each capped with a small mint/teal screen panel. They are hardware aerials, NOT animal ears and NOT cat ears.\n- TWO dark bar-shaped hair clips on ONE side of her head.\n- Small solid pixel blocks in pink, mint and purple float in the air around her hair. They are part of her and appear in every image.\n- Large teal-green eyes. Small square pixel blush marks on her cheeks.\n- A dark choker.\n- An oversized long-line iridescent pastel HOODIE with dark navy-purple horizontal stripes on the sleeves. TWO straps hang from the hood down the FRONT of the chest, one on each side of the chest print, each ending in a small square buckle.\n- On the chest an ORANGE-RED ERROR PLATE carrying the letters ERROR sits ABOVE a grey cat face drawn as blocky 8-bit PIXEL ART made of square blocks. That cat face is a picture, NEVER a written character or word - do not replace it with any Chinese character.\n- A large grey pixel cat face on the BACK of the hoodie.\n- A dark device with a teal screen on ONE wrist.\n- She wears NO hat of any kind and NO glasses. Her hair is never long, never a ponytail, never twintails.",
+      "outfit": "GLITCH - OUTFIT A. This is the outfit drawn on the original three-view model sheet (ai-brain-site images/glitch-ref.webp). The comic and the website diary art both use it.\n- The hoodie is long-line and covers her hips down to the upper thigh. There is NO skirt.\n- Below the hoodie hem ONE translucent iridescent mint-to-pink LOOP hangs on each side, reaching about mid-thigh.\n- Bare legs. No socks, no thigh-highs, no leg warmers.\n- White-and-lavender high-top sneakers with pink accents and a mint-green panel on the tongue.\n- No bag.",
+      "outfitName": "A"
     },
     "blackhole": {
       "name": "黑洞先生",

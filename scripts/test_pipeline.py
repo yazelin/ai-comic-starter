@@ -36,7 +36,8 @@ class TestCast(unittest.TestCase):
 
     def test_每個角色都有設定圖與正反面清單(self):
         for key, c in self.cast['cast'].items():
-            self.assertTrue(c.get('sheet'), f'{key} 沒有 sheet(送給模型的英文描述)')
+            self.assertTrue(prompt._sheet_of(c),
+                            f'{key} 沒有造型描述(sheet,或 identity+outfit)')
             self.assertTrue(c.get('must'), f'{key} 的 must 是空的')
             # must_not 想不出來,代表還沒想過模型會自己補什麼
             self.assertTrue(c.get('must_not'), f'{key} 的 must_not 是空的')
@@ -87,7 +88,7 @@ class TestPrompt(unittest.TestCase):
 
     def test_每個角色的_sheet_都進了設定表(self):
         for c in json.loads((ROOT / 'story' / 'cast.json').read_text('utf-8'))['cast'].values():
-            self.assertIn(c['sheet'][:40], prompt.SHEET)
+            self.assertIn(prompt._sheet_of(c)[:40], prompt.SHEET)
 
     def test_畫風描述跟這部作品一致(self):
         """BASE 是從 neko-tensei 搬來的,忘了改就會每頁都套上奇幻風。"""
