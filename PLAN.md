@@ -334,9 +334,33 @@ workflow 紅了看不懂），沒有的話一個人卡住就要等講師。
 - 樣板要不要順便當成格莉奇的正式連載起點。現況是**實質上已經是了**：第一話是真的一話、
   已上線、留言區也開了。差的只是明講，以及決定第二話什麼時候產。
 - ~~repo 現在是 private，內容做完再轉 public 並設成 template~~ **已完成**：public + template。
-- workflow 的金鑰檢查預設 `IMAGE_PROVIDER=codex`，但 `next_episode.py` 預設 `gemini`，
-  兩邊沒對齊。照 README 只填兩把 Gemini 金鑰的人會被那步擋下，錯誤訊息還指向他不需要的
-  `CODEX_IMAGE_KEY`——正好就是這個樣板想消滅的那個陷阱。改 yml 一行就好，還沒改。
+- ~~workflow 的金鑰檢查預設 `IMAGE_PROVIDER=codex`，但 `next_episode.py` 預設 `gemini`~~
+  **已修（2026-08-21）**：yml 那行改成 `gemini`，兩邊對齊。
+
+## 出圖引擎：作品走 codex，樣板預設走 gemini
+
+**決定（2026-08-21）。** 兩件事分開：
+
+- **《格莉奇OS》這部作品統一用 codex-image**（作者自架在 .11 的 codex-image-service）。
+  第一話七張圖是那支筆畫的，`episodes.json` 的署名也寫著「作畫：GPT image」。中途換引擎，
+  畫風、線條、上色會跟第一話對不起來。落實方式是這個 repo 的 Actions variable
+  `IMAGE_PROVIDER=codex` 加 secret `CODEX_IMAGE_KEY`。
+- **樣板的程式預設維持 gemini。** codex-image-service 是私有服務，用 template 開 repo 的人
+  拿不到金鑰也連不進去。預設指向私有服務正是這個樣板存在的理由之一（見「fork 者一定會踩的
+  兩個坑」）。
+
+兩者不衝突的原因：**GitHub 的 template 只複製檔案，Variables 與 Secrets 都不複製。**
+作者的覆蓋設定不會跟著流出去。
+
+**還沒驗過：Gemini 出圖那條路在這個 repo 沒有跑通過。** 2026-08-21 試過一次，用 `.bashrc`
+裡的 `GEMINI_IMAGE_KEY` 打官方 `generativelanguage.googleapis.com`，回 400 `API_KEY_INVALID`
+——那把是自架 gemini-web 中繼站的 token，不是 Google 的 API 金鑰。`_img_gemini()` 裡那段
+`imageConfig` 的實測註解也是從 neko-tensei 帶過來的，不是在這裡驗的。要驗需要一把真的
+AI Studio 金鑰，拿 `--pages 1` 生一張就知道。
+
+**這個 repo 的 Actions 現在還一把 secret 都沒有**（`gh secret list` 是空的），所以就算按
+Run workflow 也會停在金鑰檢查那步。要真的跑，至少要 `GEMINI_API_KEY`（企劃）與
+`CODEX_IMAGE_KEY`（出圖）。
 
 ## 授權
 
