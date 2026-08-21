@@ -1,3 +1,11 @@
 # 驗收規則的回歸集:一行一個案例,格式看 verify_pages.py。
 # 陽性(已知有問題的頁)與負控制(已知乾淨的頁)都要有,只看抓到幾個會嚴重高估品質。
-# 這個樣板還沒有累積案例,等出過幾話、真的踩到誤判之後再回來補。
+#
+# 圖不進工作樹,現場用 git show 取。ep2 那兩張停在不合併的 fixtures/verify-cases
+# 分支上——那是 2026-08-21 用 gemini-web 試跑的產物,沒有進正片。
+#
+# 格式:<git spec> <期望> <說明>
+30b60b2:images/ep1/02.webp PASS 負控制:第一話內頁,codex-image 畫的,禮帽與星系頭都在
+30b60b2:images/ep1/05.webp PASS 負控制:同上,另一頁
+7ec1463:images/ep2/00-cover.webp PASS 負控制:gemini-web 畫的封面,兩項都在(跟下面那張同一次跑、同一組參考圖)
+7ec1463:images/ep2/01.webp FAIL 陽性:規則F就是為它加的,第2、3格沒有禮帽、頭是純黑沒星系紋理
