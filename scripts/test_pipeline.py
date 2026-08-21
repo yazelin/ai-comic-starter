@@ -175,6 +175,33 @@ class TestForkability(unittest.TestCase):
     def test_UA_帶得出本_repo(self):
         self.assertIn(ne.REPO_NAME, ne.UA)
 
+    def test_許願串跟網站設定的是同一串(self):
+        """產線去撈的 discussion 標題,必須就是網站 giscus 掛的那一串。
+
+        不一致的症狀是「讀到 0 則許願」——看起來像沒人許願,其實是找錯地方,
+        而且不報錯。2026-08-21 真的發生:網站掛「幫她記住」,腳本寫死上游的
+        「劇情許願」,讀者留的那則願望被連續兩次無視。
+        """
+        cfg = json.loads((pathlib.Path(__file__).parent.parent / 'episodes.json')
+                         .read_text('utf-8'))
+        giscus = (cfg.get('site') or {}).get('giscus') or {}
+        if giscus.get('wish_term'):
+            self.assertEqual(ne.WISH_TERM, giscus['wish_term'])
+
+    def test_思考泡不會去要一張不存在的前世設定圖(self):
+        """上游那部作品的貓有「前世」設定圖,這裡沒有。
+
+        頁面只要出現 THOUGHT 對話框就自動加一張 past 參考圖,而 cast.json
+        沒有那個 ref → prompt.REF['past'] KeyError → 整頁出圖連三次失敗,
+        錯誤訊息只有一個 'past'。2026-08-21 端對端實測撞到。
+        """
+        page = {'n': 1, 'chars': [], 'world': [],
+                'panels': [{'lines': [{'shape': 'THOUGHT', 'text': '想事情'}]}]}
+        keys = ne.page_refs(page)
+        self.assertNotIn('past', keys)
+        for k in keys:
+            self.assertIn(k, prompt.REF, f'{k} 不在 REF 裡,出圖時會 KeyError')
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=1)
