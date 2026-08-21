@@ -352,6 +352,13 @@ workflow 紅了看不懂），沒有的話一個人卡住就要等講師。
 兩者不衝突的原因：**GitHub 的 template 只複製檔案，Variables 與 Secrets 都不複製。**
 作者的覆蓋設定不會跟著流出去。
 
+**測試期走 .11，教學版走官方（2026-08-21）。** 現階段要讓 workflow 真的跑起來，用的是自架的
+兩條線：企劃打 `GEMINI_WEB_BASE_URL=https://ching-tech.ddns.net/gemini-web`（那支服務有
+Gemini 相容的 `/v1beta/models/{model}:generateContent`），出圖打
+`CODEX_IMAGE_BASE_URL=https://ching-tech.ddns.net/codex-image`。兩條公開路徑都在，沒帶金鑰
+分別回 403 與 401，所以路由是對的、只差憑證。**開課那一版兩個都要換成官方 Google**：
+學員拿不到自架服務的金鑰。
+
 **還沒驗過：Gemini 出圖那條路在這個 repo 沒有跑通過。** 2026-08-21 試過一次，用 `.bashrc`
 裡的 `GEMINI_IMAGE_KEY` 打官方 `generativelanguage.googleapis.com`，回 400 `API_KEY_INVALID`
 ——那把是自架 gemini-web 中繼站的 token，不是 Google 的 API 金鑰。`_img_gemini()` 裡那段
