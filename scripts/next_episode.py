@@ -52,8 +52,23 @@ def repo_slug():
 REPO_SLUG = repo_slug()
 REPO_OWNER, REPO_NAME = REPO_SLUG.split('/', 1)
 
-WISH_CATEGORY = 'Ideas'      # 內建分類,首頁許願串就掛在這裡
-WISH_TERM = '劇情許願'        # giscus 的 data-term,也是那串 discussion 的標題
+def _giscus_cfg():
+    """episodes.json 的 site.giscus。讀不到就回空 dict(冷啟動時檔案可能還是空的)。"""
+    try:
+        cfg = json.loads((ROOT / 'episodes.json').read_text('utf-8'))
+        return (cfg.get('site') or {}).get('giscus') or {}
+    except Exception:                       # noqa: BLE001 - 設定讀不到不該擋住出稿
+        return {}
+
+
+# 許願串長在哪。**這兩個值必須跟網站上 giscus 的設定一模一樣**,不然這支腳本
+# 會去找一串不存在的 discussion,然後回報「讀到 0 則許願」——那句話看起來像
+# 「這次沒有人許願」,實際上是「找錯地方」,而且不會有任何錯誤。
+# 2026-08-21 就是這樣:網站掛的是「幫她記住」,這裡寫死上游那部作品的
+# 「劇情許願」,讀者真的留了一則願望,兩次跑都當成沒有。
+# 所以改成從 episodes.json 讀,那份是網站與產線共用的單一事實來源。
+WISH_CATEGORY = _giscus_cfg().get('category') or 'Ideas'
+WISH_TERM = _giscus_cfg().get('wish_term') or '劇情許願'
 
 _WISH_QUERY_TMPL = """
 { repository(owner:"%s", name:"%s") {
@@ -734,7 +749,11 @@ def page_refs(page):
     has_os = any(ln.get('shape') == 'THOUGHT'
                  for pn in page.get('panels') or []
                  for ln in pn.get('lines') or [])
-    if has_os and 'past' not in keys:
+    # 「前世」是上游那部作品才有的設定圖。cast.json 沒有 past 這個 ref 的話
+    # 就不能加,不然 prompt.REF[k] 會 KeyError,而症狀是整頁出圖連三次失敗、
+    # 錯誤只印一個 'past',看不出跟思考泡有關。上面每一種 key 都有守衛,
+    # 只有這個沒有。
+    if has_os and 'past' in prompt.REF and 'past' not in keys:
         keys.append('past')
     # 框型對照圖排在畫風錨後面,但只有還有空位才放——它是手法的錨,角色設定圖
     # 與前世灰階是內容正確性,兩者搶額度時先保內容。所以它是唯一一個「擠不下
