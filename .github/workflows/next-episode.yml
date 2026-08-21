@@ -39,6 +39,12 @@ jobs:
       # 要哪些金鑰看選了哪組後端。以前這裡硬要求 CODEX_IMAGE_KEY,換成
       # Gemini 出圖的人會被自己的檢查擋下來,而錯誤訊息還指向一把他根本
       # 不需要的金鑰。
+      #
+      # 預設值要跟 scripts/next_episode.py 一致(企劃 gemini、出圖 gemini),
+      # 不然這步擋下來的是「腳本其實跑得動」的組合。這裡曾經寫 codex,
+      # 那是作者自架的私有服務,用 template 開 repo 的人拿不到金鑰。
+      # 作者自己的 repo 是用 Actions variable 設 IMAGE_PROVIDER=codex 覆蓋的
+      # ——variables 與 secrets 不會被 template 複製走,所以覆蓋不影響別人。
       - name: 確認選到的後端有金鑰
         env:
           PLANNER_PROVIDER: ${{ vars.PLANNER_PROVIDER }}
@@ -49,7 +55,7 @@ jobs:
           GEMINI_IMAGE_KEY: ${{ secrets.GEMINI_IMAGE_KEY }}
         run: |
           P="${PLANNER_PROVIDER:-gemini}"
-          I="${IMAGE_PROVIDER:-codex}"
+          I="${IMAGE_PROVIDER:-gemini}"
           echo "企劃走 $P,出圖走 $I"
           miss=0
           case "$P" in

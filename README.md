@@ -17,8 +17,8 @@
 **還沒驗過的一件事：GitHub Actions 那條路還沒有人真的走過一次。** 第一話是在本機直接跑
 `scripts/next_episode.py` 產出來的，作畫走作者自架的 codex-image-service。
 `.github/workflows/next-episode.yml` 寫好了、cron 先關著，但還沒有人按過 Run workflow，
-所以「按一次 Run workflow 就出一頁」目前是設計，不是實測結果。你是第一個按的人的話，
-預期會遇到的坑寫在下一節。
+所以「按一次 Run workflow 就出一頁」目前是設計，不是實測結果。第一個按下去的人如果撞到
+什麼，開個 issue。
 
 隨時可以自己跑的檢查（不需要金鑰）：
 
@@ -40,16 +40,15 @@ python3 build.py                        # 從 episodes.json 重建整個網站
 | `GEMINI_API_KEY` | 你的 Gemini 金鑰（企劃／寫劇本用） |
 | `GEMINI_IMAGE_KEY` | 同一把就行（出圖用） |
 
-預設就是 Google 官方端點與官方影像模型，不用另外設 base url。
-
-> **workflow 目前多要求一件事。** `scripts/` 裡出圖的預設是 `gemini`，但 workflow
-> 那支「確認選到的後端有金鑰」的檢查預設是 `codex`，兩邊還沒對齊。只填上面兩把金鑰的話，
-> 會在那一步被擋下，而且錯誤訊息指向你根本不需要的 `CODEX_IMAGE_KEY`。
-> 解法是到 repo 的 Settings → Secrets and variables → Actions → Variables 加一個
-> `IMAGE_PROVIDER=gemini`。
+預設就是 Google 官方端點與官方影像模型，不用另外設 base url，也不用選 provider。
 
 > neko-tensei 那邊的預設值指向作者自架的私有服務，fork 的人不改就會失敗，而且錯誤
 > 訊息看起來像金鑰壞了。樣板刻意把預設值翻轉過來，就是為了讓那個陷阱不存在。
+
+作者自己這個 repo 跑的是另一組（Actions variable `IMAGE_PROVIDER=codex`，走自架的
+codex-image-service），因為第一話是那支筆畫的，中途換引擎畫風會漂。**那組設定不會跟著
+template 走**：GitHub 只複製檔案，Variables 與 Secrets 都不複製，所以你開出來的 repo
+拿到的是上面那個 Gemini 預設。
 
 想換別的後端才需要動這些：`PLANNER_PROVIDER=openai` 加 `OPENAI_BASE_URL`
 （Groq、Ollama、OpenRouter 都是 OpenAI 相容的）。走那條的話注意
