@@ -4,9 +4,13 @@
 目標讀者是漫畫產線實作營的學員：fork 下來、填自己的金鑰、按一次 Run workflow，
 當晚就帶得走一頁真的漫畫。
 
-**檔期未定（2026-08-11）**：原本排 8/19，但浮水印教學站可能先排，所以沒有時間壓力。
+**檔期未定（2026-08-11 記，2026-08-21 仍未定）**：原本排 8/19，但浮水印教學站可能先排，
+所以沒有時間壓力。
 
-**進度：七步走完前四步。** 動手之前先讀完這份，尤其是每一步底下記的踩雷。
+**進度：八步全部做完，站已上線**（<https://yazelin.github.io/ai-comic-starter/>）。
+repo 已轉 public 並設成 template。剩下唯一還沒驗的是 **GitHub Actions 那條路沒有人真的
+按過一次 Run workflow**：第一話是在本機跑 `scripts/next_episode.py` 產出來的。
+動手之前先讀完這份，尤其是每一步底下記的踩雷。
 
 ## 為什麼需要它
 
@@ -221,12 +225,14 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
 
    **不給任何角色創傷背景。** 格莉奇為什麼只有 4KB 的官方說法是「她自己也忘記了」，
    這句本身就是笑點，不是迴避。這條是硬規定，寫進了「不要出現的東西」。
-6. **`episodes.json`**：第一話的骨架。
+6. ~~**`episodes.json`**~~ **已完成**：第一話的骨架，加上 `site` 區塊（站名、Pages 網址、
+   giscus 的 repo 與兩個 category id、`cache_prefix`、下一話預告）。fork 的人要換掉的
+   東西集中在這裡，`build.py` 與 workflow 都不用動。
 7. ~~**README**~~ **已完成**：fork 指南、四個 secret、兩個一定會踩的坑寫在最前面、
    cast-lock 三條規矩摘要、驗收怎麼做。`tools/` 也補上了（`build.py`、`check.py`、
    `count_limbs.py`），附上游來源以便同步。授權分開處理：程式碼 MIT、角色素材 CC BY-NC。
 
-8. **把產線與網站搬過來**（尚未做，README 已註明產線還沒接上）。
+8. ~~**把產線與網站搬過來**~~ **已完成**（兩個階段都過了，見下方各自的驗收記錄）。
 
    **發表點決定了：漫畫發表在這個 repo 自己的 GitHub Pages 上**，`ai-brain-site`
    之後用自訂 app 的 iframe 內嵌進來（那個功能還在做）。所以是**一個發表點加一扇窗**，
@@ -264,7 +270,15 @@ neko-tensei 本體 fork 起來只要改三個檔案（`story/cast.json`、`story
      `raw.githubusercontent.com`、`GEMINI_BASE` 與 `IMG_BASE` 的預設值
      （後兩個已經寫進 README 的「一定會踩的坑」）
 
-   **階段二：網站（Pages 開得起來就算過）**
+   **階段二：網站（Pages 開得起來就算過）—— 已完成，Pages 已上線**
+
+   2026-08-17 完成，站在 <https://yazelin.github.io/ai-comic-starter/>。第一話七張圖
+   （封面加六頁）全部產出，單張 165 到 226 秒，作畫走 .11 的 codex-image-service。
+   機器驗收 3 PASS 4 FAIL，抓到的都是真缺陷（黑洞先生的閉口微笑系統性漏掉、第 6 頁
+   有框外的「Zzz」），隔天重生五張修掉。
+
+   `build.py` 又找出兩處寫死並參數化：下一話預告的文字、service worker 的快取前綴
+   （GitHub Pages 專案站同源，快取名撞在一起會互相打架）。
 
    - `build.py`（網站產生器，從 `episodes.json` 生閱讀頁、首頁列表、sitemap、
      `sw.js` 快取清單）
@@ -317,9 +331,12 @@ workflow 紅了看不懂），沒有的話一個人卡住就要等講師。
 
 ## 待拍板
 
-- 樣板要不要順便當成格莉奇的正式連載起點（如果要，`episodes.json` 的第一話就不能
-  只是範例，要能接下去）
-- repo 現在是 private，內容做完再轉 public 並設成 template
+- 樣板要不要順便當成格莉奇的正式連載起點。現況是**實質上已經是了**：第一話是真的一話、
+  已上線、留言區也開了。差的只是明講，以及決定第二話什麼時候產。
+- ~~repo 現在是 private，內容做完再轉 public 並設成 template~~ **已完成**：public + template。
+- workflow 的金鑰檢查預設 `IMAGE_PROVIDER=codex`，但 `next_episode.py` 預設 `gemini`，
+  兩邊沒對齊。照 README 只填兩把 Gemini 金鑰的人會被那步擋下，錯誤訊息還指向他不需要的
+  `CODEX_IMAGE_KEY`——正好就是這個樣板想消滅的那個陷阱。改 yml 一行就好，還沒改。
 
 ## 授權
 
