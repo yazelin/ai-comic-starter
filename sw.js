@@ -10,7 +10,7 @@
    build.py 就會自己變;要強制所有讀者重來,改 build.py 的 EPOCH。 */
 /* ver:start */
 const SHELL = 'glitchos-shell-v20-0b4c315f';
-const ASSET = 'glitchos-asset-v20-c9a99406';
+const ASSET = 'glitchos-asset-v20-86fbd6ba';
 /* ver:end */
 
 /* 以下兩份清單由 build.py 從 episodes.json 產生,別手改。 */
