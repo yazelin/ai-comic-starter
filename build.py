@@ -137,6 +137,9 @@ def build_episode(ep, prev, nxt):
     out.append(f'<div class="progress" aria-hidden="true"><i></i>'
                f'<span>1/{len(ep["pages"])}</span></div>\n\n')
     out.append(FOOTER)
+    # ep/ 只裝產生出來的頁面。一話都沒有的時候(剛用 template 開的 repo、或
+    # 把舊話砍掉重出)git 不會保留這個空目錄,寫檔就會 FileNotFoundError。
+    (ROOT / 'ep').mkdir(exist_ok=True)
     (ROOT / 'ep' / f'{ep["n"]}.html').write_text(''.join(out), 'utf-8')
 
 

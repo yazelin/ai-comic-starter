@@ -26,6 +26,14 @@ jobs:
       - name: 裝相依（整條線只有這兩個 pip 套件）
         run: pip install --quiet opencc-python-reimplemented pillow
 
+      # 開 PR 與開 issue 都帶 --label auto-episode,而 gh 在 label 不存在時
+      # 會整個失敗。剛用 template 開出來的 repo 一定沒有這個 label,所以第一次
+      # 跑到最後一步才炸。--force 是「有就更新、沒有就建」,重跑不會出錯。
+      - name: 確保 auto-episode 這個 label 存在
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh label create auto-episode --color BFD4F2 --description "自動產出的話數草稿" --force
+
       - name: 確認沒有還開著的草稿 PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
