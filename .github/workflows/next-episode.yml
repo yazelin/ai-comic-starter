@@ -73,7 +73,7 @@ jobs:
       - name: 算出這次是第幾話
         id: ep
         run: |
-          N=$(python3 -c "import json;print(max(e['n'] for e in json.load(open('episodes.json'))['episodes']) + 1)")
+          N=$(python3 -c "import json;e=json.load(open('episodes.json'))['episodes'];print(max([x['n'] for x in e], default=0) + 1)")
           echo "n=$N" >> "$GITHUB_OUTPUT"
           echo "這次要產第 $N 話"
 
