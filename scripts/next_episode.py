@@ -807,6 +807,12 @@ def render_storyboard(plan, n):
         out.append('|---|---|---|---|')
         for pn in pg.get('panels') or []:
             first = True
+            # 無聲的格子(整格沒有對白)也要有一列。人是看這張表審稿的,
+            # 一句一列的話那一格會整格從表上消失,只剩下面的 prompt 區塊裡有。
+            if not (pn.get('lines') or []):
+                out.append(f"| {_cell(pn.get('pos', ''))} | "
+                           f"{_cell(pn.get('scene', ''))} | （無對白） | — |")
+                continue
             for ln in pn.get('lines') or []:
                 pos = pn.get('pos', '') if first else ''
                 scene = pn.get('scene', '') if first else ''
