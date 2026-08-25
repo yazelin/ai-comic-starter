@@ -10,7 +10,7 @@
 
 1. 格莉奇過度自信地準備開台，手已經自然順暢地操作完所有儀器
 2. 想介紹觀眾名稱時最後一個關鍵詞卡住，浮現出亮的記憶光團
-3. 黑洞先生吃掉光團長出一隻腳，格莉奇成功把記憶外包給線上的第一批觀眾
+3. 黑洞先生吃掉光團長出一隻腳，格莉奇轉頭把記憶外包給線上的第一批觀眾
 
 
 ---
@@ -69,22 +69,21 @@ PANEL 2 (bottom): GLITCH stands on the right, antenna twitching with confidence 
 | 格 | 畫面 | 對白 | 框型 |
 |---|---|---|---|
 | top | GLITCH stands on the right frozen mid-sentence with eyes wide empty inside room, while a bright, glowing block of light starts floating out from her, MR BLACK HOLE watches on the left. | 格莉奇「那個稱呼就是……大家叫做……」 | WEAK |
-|  |  | 格莉奇「額……名字是……」 | TREMBLE |
+|  |  | 格莉奇「呃……名字是……」 | TREMBLE |
 | mid | GLITCH on the right scratching her head in confusion inside room, while a solid bright cubical light fully floats out of her towards MR BLACK HOLE on the left. | 格莉奇「我知道這是一個跟硬體相關的詞！我確定！」 | THOUGHT |
 |  |  | 格莉奇「可……可是最後那個詞叫不出來！」 | WEAK |
-| bottom | MR BLACK HOLE on the left opens its void mouth and consumes the bright light block inside room, while GLITCH stands on the right looking at the monitor. | 格莉奇「糟糕，手邊放不下了，被清空了……」 | CAPTION |
+| bottom | MR BLACK HOLE on the left opens its void mouth and consumes the bright light block inside room, while GLITCH stands on the right looking at the monitor. | （無對白） | — |
 
 參考圖：style、balloons、room、glitch、blackhole
 
 ```
 PANEL 1 (top): GLITCH stands on the right frozen mid-sentence with eyes wide empty inside room, while a bright, glowing block of light starts floating out from her, MR BLACK HOLE watches on the left.
   WEAK BALLOON from glitch: 那個稱呼就是……大家叫做……
-  TREMBLE BALLOON from glitch: 額……名字是……
+  TREMBLE BALLOON from glitch: 呃……名字是……
 PANEL 2 (middle): GLITCH on the right scratching her head in confusion inside room, while a solid bright cubical light fully floats out of her towards MR BLACK HOLE on the left.
   THOUGHT BALLOON from glitch: 我知道這是一個跟硬體相關的詞！我確定！
   WEAK BALLOON from glitch: 可……可是最後那個詞叫不出來！
 PANEL 3 (bottom): MR BLACK HOLE on the left opens its void mouth and consumes the bright light block inside room, while GLITCH stands on the right looking at the monitor.
-  CAPTION BOX from glitch: 糟糕，手邊放不下了，被清空了……
 ```
 
 ---
